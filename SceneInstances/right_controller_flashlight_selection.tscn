@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bgrrsga8gyqvi"]
 
-[ext_resource type="Script" path="res://Scripts/flashlightTechnique.gd" id="1_yxg7j"]
+[ext_resource type="Script" path="res://Scripts/Contollers/flashlightTechnique.gd" id="1_yxg7j"]
 [ext_resource type="PackedScene" uid="uid://bc8lh0rihgxvi" path="res://Models/Quest2Controllers/OculusQuest2TouchController_Right.gltf" id="2_ac0vi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7mn6f"]

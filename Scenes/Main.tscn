@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/XRSetup.gd" id="1_ijei3"]
 [ext_resource type="PackedScene" uid="uid://cnwp7ndjr4s8y" path="res://Models/Quest2Controllers/OculusQuest2TouchController_Left.gltf" id="2_t6tvv"]
 [ext_resource type="PackedScene" uid="uid://bgrrsga8gyqvi" path="res://SceneInstances/right_controller_flashlight_selection.tscn" id="4_7fdne"]
-[ext_resource type="Script" path="res://Scripts/OrbConnection.gd" id="5_vwttx"]
-[ext_resource type="PackedScene" path="res://SceneInstances/Orb.tscn" id="6_dpdlu"]
+[ext_resource type="Script" path="res://Scripts/Orbs/OrbConnection.gd" id="5_vwttx"]
+[ext_resource type="PackedScene" uid="uid://bjcmeh163cu7o" path="res://SceneInstances/Orb.tscn" id="6_dpdlu"]
 [ext_resource type="PackedScene" uid="uid://d2ny4h0w312eh" path="res://Models/Animals/Deer/Deer.glb" id="7_fdxov"]
 [ext_resource type="PackedScene" uid="uid://bembmau1gxhyb" path="res://Models/Animals/Fox/Fox.glb" id="8_0kmie"]
 [ext_resource type="PackedScene" uid="uid://b3pr0ff3ly0b3" path="res://Models/Animals/Duck/Duck.glb" id="9_6i68h"]
@@ -45,7 +45,6 @@ tracker = &"left_hand"
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="RightController" parent="XROrigin3D" instance=ExtResource("4_7fdne")]
-script = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u8y0r")
@@ -94,38 +93,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.47318, 0.5, -1.38815)
 skeleton = NodePath("../..")
 
 [node name="Coyote" parent="Web/CoyoteOrb" instance=ExtResource("11_s8fai")]
-transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, -0.287247, -0.00311545)
-
-[node name="DeerOrb2" parent="Web" instance=ExtResource("6_dpdlu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.883086, 3.71978, 4.20724)
-skeleton = NodePath("../..")
-
-[node name="Deer" parent="Web/DeerOrb2" instance=ExtResource("7_fdxov")]
-transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, -0.000743538, -0.00125903)
-
-[node name="FoxOrb2" parent="Web" instance=ExtResource("6_dpdlu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.37883, 2.75708, 1.12468)
-
-[node name="Fox" parent="Web/FoxOrb2" instance=ExtResource("8_0kmie")]
-transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, -0.226481, 0)
-
-[node name="DuckOrb2" parent="Web" instance=ExtResource("6_dpdlu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81325, 2.08534, 4.56619)
-
-[node name="Duck" parent="Web/DuckOrb2" instance=ExtResource("9_6i68h")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.234658, 0)
-
-[node name="SquirrelOrb2" parent="Web" instance=ExtResource("6_dpdlu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01235, 3.69379, 2.88891)
-
-[node name="Squirrel" parent="Web/SquirrelOrb2" instance=ExtResource("10_41wjm")]
-transform = Transform3D(0.006, 0, 0, 0, 0.006, 0, 0, 0, 0.006, 0, 0, 0)
-
-[node name="CoyoteOrb2" parent="Web" instance=ExtResource("6_dpdlu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.85201, 1.59093, 5.86048)
-skeleton = NodePath("../..")
-
-[node name="Coyote" parent="Web/CoyoteOrb2" instance=ExtResource("11_s8fai")]
 transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, -0.287247, -0.00311545)
 
 [connection signal="input_vector2_changed" from="XROrigin3D/RightController" to="XROrigin3D/RightController" method="_on_input_vector_2_changed"]

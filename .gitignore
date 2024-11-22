@@ -15,4 +15,4 @@ mono_crash.*.json
 /android/
 /addons/
 /Builds/
-*/.tmp
+*.tmp
