@@ -1,1 +1,3 @@
 # WebOfLife
+
+Animal population simulation
