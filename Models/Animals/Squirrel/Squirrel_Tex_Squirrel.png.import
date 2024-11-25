@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://frpl2hhb0pmh"
 path.s3tc="res://.godot/imported/Squirrel_Tex_Squirrel.png-fc77c39f67f5c7b6d35ee421003d430d.s3tc.ctex"
+path.etc2="res://.godot/imported/Squirrel_Tex_Squirrel.png-fc77c39f67f5c7b6d35ee421003d430d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Models/Animals/Squirrel/Squirrel_Tex_Squirrel.png"
-dest_files=["res://.godot/imported/Squirrel_Tex_Squirrel.png-fc77c39f67f5c7b6d35ee421003d430d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Squirrel_Tex_Squirrel.png-fc77c39f67f5c7b6d35ee421003d430d.s3tc.ctex", "res://.godot/imported/Squirrel_Tex_Squirrel.png-fc77c39f67f5c7b6d35ee421003d430d.etc2.ctex"]
 
 [params]
 
