@@ -2,21 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5oo3oxekl72m"
-path.s3tc="res://.godot/imported/Coyote_Coyote_BaseColor.png-6d3dc0c7e5811599616f2e773aacf673.s3tc.ctex"
-path.etc2="res://.godot/imported/Coyote_Coyote_BaseColor.png-6d3dc0c7e5811599616f2e773aacf673.etc2.ctex"
+uid="uid://8ilqp6li80d2"
+path.s3tc="res://.godot/imported/cdb10629.png-128c980e69d8f01a047525f4081fe14a.s3tc.ctex"
+path.etc2="res://.godot/imported/cdb10629.png-128c980e69d8f01a047525f4081fe14a.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "78cac05072b84428724f37375a7989c5"
-}
 
 [deps]
 
-source_file="res://Models/Animals/Coyote/Coyote_Coyote_BaseColor.png"
-dest_files=["res://.godot/imported/Coyote_Coyote_BaseColor.png-6d3dc0c7e5811599616f2e773aacf673.s3tc.ctex", "res://.godot/imported/Coyote_Coyote_BaseColor.png-6d3dc0c7e5811599616f2e773aacf673.etc2.ctex"]
+source_file="res://Models/Arm Cannon/cdb10629.png"
+dest_files=["res://.godot/imported/cdb10629.png-128c980e69d8f01a047525f4081fe14a.s3tc.ctex", "res://.godot/imported/cdb10629.png-128c980e69d8f01a047525f4081fe14a.etc2.ctex"]
 
 [params]
 
