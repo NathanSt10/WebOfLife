@@ -1,8 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://ciphu7ctboar1"]
+[gd_scene load_steps=18 format=3 uid="uid://ciphu7ctboar1"]
 
 [ext_resource type="Script" path="res://Scripts/XRSetup.gd" id="1_ijei3"]
-[ext_resource type="PackedScene" uid="uid://cnwp7ndjr4s8y" path="res://Models/Quest2Controllers/OculusQuest2TouchController_Left.gltf" id="2_t6tvv"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="2_ktjwo"]
+[ext_resource type="Script" path="res://Scripts/Contollers/SwitchControllers.gd" id="3_1aqbc"]
 [ext_resource type="PackedScene" uid="uid://bgrrsga8gyqvi" path="res://SceneInstances/right_controller_flashlight_selection.tscn" id="4_7fdne"]
+[ext_resource type="PackedScene" uid="uid://cpxkpyl1mwdcy" path="res://SceneInstances/JetpackController.tscn" id="4_xcc3m"]
+[ext_resource type="PackedScene" uid="uid://kb4efrgb2xfi" path="res://SceneInstances/BubbleCursor.tscn" id="5_jlwah"]
 [ext_resource type="Script" path="res://Scripts/Orbs/OrbConnection.gd" id="5_vwttx"]
 [ext_resource type="PackedScene" uid="uid://bjcmeh163cu7o" path="res://SceneInstances/Orb.tscn" id="6_dpdlu"]
 [ext_resource type="PackedScene" uid="uid://d2ny4h0w312eh" path="res://Models/Animals/Deer/Deer.glb" id="7_fdxov"]
@@ -33,18 +36,24 @@ script = ExtResource("1_ijei3")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.55686)
+script = ExtResource("2_ktjwo")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="LeftController" type="XRController3D" parent="XROrigin3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
+script = ExtResource("3_1aqbc")
+jetpack_scene = ExtResource("4_xcc3m")
+bubble_cursor_scene = ExtResource("5_jlwah")
+flashlight_scene = ExtResource("4_7fdne")
 
-[node name="OculusQuest2TouchController_Left" parent="XROrigin3D/LeftController" instance=ExtResource("2_t6tvv")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="RightController" parent="XROrigin3D" instance=ExtResource("4_7fdne")]
+[node name="RightController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+script = ExtResource("3_1aqbc")
+jetpack_scene = ExtResource("4_xcc3m")
+bubble_cursor_scene = ExtResource("5_jlwah")
+flashlight_scene = ExtResource("4_7fdne")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u8y0r")
@@ -95,4 +104,5 @@ skeleton = NodePath("../..")
 [node name="Coyote" parent="Web/CoyoteOrb" instance=ExtResource("11_s8fai")]
 transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, -0.287247, -0.00311545)
 
-[connection signal="input_vector2_changed" from="XROrigin3D/RightController" to="XROrigin3D/RightController" method="_on_input_vector_2_changed"]
+[connection signal="button_pressed" from="XROrigin3D/LeftController" to="XROrigin3D/LeftController" method="_on_button_pressed"]
+[connection signal="button_pressed" from="XROrigin3D/RightController" to="XROrigin3D/RightController" method="_on_button_pressed"]
