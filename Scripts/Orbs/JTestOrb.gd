@@ -3,7 +3,7 @@ class_name Orb extends Node3D
 var animalName = "default"
 var orbVelocity = 2.0
 var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
-var moved = true #Change this to true when the orb is moved or placed. Change to false after locking in
+var moved = false #Change this to true when the orb is moved or placed. Change to false after locking in
 @export var population = 100
 
 signal inPosition
@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	if(moved):
 		var lastPos = global_position
 		global_position = global_position.slerp(goalLoc, 2*delta)
-		if(lastPos == global_position):
+		if(lastPos == global_position): #Update this by adding an area3d that emits the signal when entered.
 			moved = false
 			inPosition.emit(animalName)
 	
