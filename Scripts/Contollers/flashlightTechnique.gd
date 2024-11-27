@@ -34,12 +34,13 @@ func _process(delta: float) -> void:
 	
 	if $"ShapeCast3D".is_colliding():
 		selections_list = $"ShapeCast3D".collision_result
-		var closest = $"ShapeCast3D".get_collider(abs(offset) % selections_list.size()).get_parent()
-		if active_selection == null or active_selection != closest:
+		var closest = $"ShapeCast3D".get_collider(abs(offset) % selections_list.size())
+		if closest != null: closest = closest.get_parent()
+		if active_selection == null or (active_selection != closest and closest != null):
 			prev_selection = active_selection
 			if prev_selection != null: prev_selection.scale = Vector3(1, 1, 1)
 			active_selection = closest
-			active_selection.scale = Vector3(1.1, 1.1, 1.1)
+			if active_selection != null: active_selection.scale = Vector3(1.1, 1.1, 1.1)
 	elif active_selection != null:
 		offset = 0
 		active_selection.scale = Vector3(1,1,1)

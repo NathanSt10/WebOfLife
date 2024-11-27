@@ -5,10 +5,10 @@ extends MeshInstance3D
 
 @export var points = [Vector3(0,0,0),Vector3(0,5,0)]
 @export var startThickness = 0.02
-@export var endThickness = 0.01
+@export var endThickness = 0.02
 @export var cornerSmooth = 5
 @export var capSmooth = 5
-@export var drawCaps = true
+@export var drawCaps = false
 @export var drawCorners = true
 @export var globalCoords = true
 @export var scaleTexture = true
