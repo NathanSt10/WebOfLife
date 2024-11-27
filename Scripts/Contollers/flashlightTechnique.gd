@@ -12,11 +12,9 @@ var right_controller_model = preload("res://Models/Quest2Controllers/OculusQuest
 
 func _ready() -> void:
 	print("Flashlight Technique Ready")
-	#tracker = get_parent_node_3d().tracker
 
 
 func initialize(new_tracker: String):
-	#tracker = new_tracker
 	active_selection = null
 	active_selection_pos = null
 	prev_selection = null
@@ -28,6 +26,8 @@ func initialize(new_tracker: String):
 	var right_controller_model_scene = right_controller_model.instantiate()
 	left_controller_model_scene.global_rotation = Vector3(0,deg_to_rad(180),0)
 	right_controller_model_scene.global_rotation = Vector3(0,deg_to_rad(180),0)
+	left_controller_model_scene.position = Vector3(0,0,.035)
+	right_controller_model_scene.position = Vector3(0,0,.035)
 	if get_parent().is_left: add_child(left_controller_model_scene)
 	else: add_child(right_controller_model_scene)
 	print("Flashlight reinitialized with tracker:", tracker)
@@ -35,11 +35,6 @@ func initialize(new_tracker: String):
 
 
 func _process(delta: float) -> void:
-	#global_transform = get_parent_node_3d().global_transform
-	#var main_controller = get_parent_node_3d().get_parent_node_3d()
-	#$"ShapeCast3D".global_position = main_controller.global_position + Vector3(0,0,-14)
-	#$"ShapeCast3D".global_rotation = main_controller.global_rotation + Vector3(deg_to_rad(90),0,0)
-	
 	if $"ShapeCast3D".is_colliding():
 		selections_list = $"ShapeCast3D".collision_result
 		var closest = $"ShapeCast3D".get_collider(abs(offset) % selections_list.size())

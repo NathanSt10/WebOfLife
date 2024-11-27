@@ -63,26 +63,17 @@ func _on_button_pressed(name: String) -> void:
 	if (name == "by_button"):
 		switch_to_controller("jetpack")
 		
-	print("on_button_pressed")
-	print(name)
 	if name == "grip_click":
-		print("Checking on_button_pressed")
 		if current_controller_instance.has_method("_on_button_pressed"):
-			print("Calling on_button_pressed")
 			current_controller_instance.call("_on_button_pressed", name)
 
 
 func _on_button_released(name: String) -> void:
-	print("_on_button_released")
-	print(name)
 	if name == "grip_click":
-		print("Checking _on_button_released")
 		if current_controller_instance.has_method("_on_button_released"):
-			print("Calling _on_button_released")
 			current_controller_instance.call("_on_button_released", name)
 
 
 func _on_input_vector_2_changed(name: String, value: Vector2) -> void:
 	if current_controller_instance.has_method("_on_input_vector_2_changed"):
-			print("Calling _on_input_vector_2_changed")
 			current_controller_instance.call("_on_input_vector_2_changed", name, value)
