@@ -11,8 +11,8 @@ var current_controller_type: String
 var current_controller_instance: Node = get_child(0) as XRController3D
 
 func _ready() -> void:
-	switch_to_controller("flashlight")
 	if name == "LeftController": is_left = true
+	switch_to_controller("flashlight")
 	print(name)
 
 
