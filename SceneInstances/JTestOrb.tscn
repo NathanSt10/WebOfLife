@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://caxcapgoijnvn"]
+
+[ext_resource type="Script" path="res://Scripts/Orbs/JTestOrb.gd" id="1_h81hj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kaxu4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fng0h"]
+transparency = 1
+cull_mode = 1
+albedo_color = Color(0.403922, 0.956863, 0.976471, 0.501961)
+metallic = 0.05
+roughness = 0.18
+ao_light_affect = 0.41
+backlight_enabled = true
+backlight = Color(0, 0.107524, 0.107724, 1)
+refraction_enabled = true
+refraction_scale = 0.01
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sh3ve"]
+
+[node name="Orb" type="MeshInstance3D"]
+mesh = SubResource("SphereMesh_kaxu4")
+surface_material_override/0 = SubResource("StandardMaterial3D_fng0h")
+script = ExtResource("1_h81hj")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_sh3ve")
