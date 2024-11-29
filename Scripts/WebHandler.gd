@@ -12,8 +12,8 @@ var timeElapsed = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Initialize this in a method/signal call. When an orb is placed, reparent into web and add reference
-	webDict["Orb1"] = orb_1
-	webDict["Orb2"] = orb_2
+	orb_1.inPosition.connect(_orb_in_position)
+	orb_2.inPosition.connect(_orb_in_position)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,4 +46,7 @@ func updateWeb():
 				if(webDict[animal].population > 1):
 					webDict[animal].population += webDict[animal].population/2
 				print("Orb2: " + str(webDict[animal].population))
+func _orb_in_position(animalName : String, orbRef : Node3D):
+	webDict[animalName] = orbRef
+	print(animalName)
 			

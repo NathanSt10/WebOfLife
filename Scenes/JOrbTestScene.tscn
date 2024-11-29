@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0iy0pblnh6wq"]
+[gd_scene load_steps=7 format=3 uid="uid://b0iy0pblnh6wq"]
 
 [ext_resource type="Script" path="res://Scripts/WebHandler.gd" id="1_8eml7"]
 [ext_resource type="PackedScene" uid="uid://caxcapgoijnvn" path="res://SceneInstances/JTestOrb.tscn" id="1_8owpl"]
 [ext_resource type="Script" path="res://Scripts/XRSetup.gd" id="2_penjq"]
 [ext_resource type="PackedScene" uid="uid://cnwp7ndjr4s8y" path="res://Models/Quest2Controllers/OculusQuest2TouchController_Left.gltf" id="3_h8tnd"]
 [ext_resource type="PackedScene" uid="uid://bc8lh0rihgxvi" path="res://Models/Quest2Controllers/OculusQuest2TouchController_Right.gltf" id="4_te84r"]
+
+[sub_resource type="Environment" id="Environment_cc07i"]
 
 [node name="JOrbTestSceneHandler" type="Node3D"]
 
@@ -13,8 +15,11 @@ script = ExtResource("1_8eml7")
 
 [node name="Orb1" parent="WebHandler" instance=ExtResource("1_8owpl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80996, 0, -7.30873)
+animalName = "Orb1"
 
 [node name="Orb2" parent="WebHandler" instance=ExtResource("1_8owpl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99157, 0, -4.36347)
+animalName = "Orb2"
 population = 200
 
 [node name="XRRig" type="Node3D" parent="."]
@@ -35,3 +40,9 @@ tracker = &"right_hand"
 
 [node name="OculusQuest2TouchController_Right" parent="XRRig/XROrigin3D/RightController" instance=ExtResource("4_te84r")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cc07i")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
