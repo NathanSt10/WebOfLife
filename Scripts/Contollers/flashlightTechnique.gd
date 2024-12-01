@@ -1,12 +1,5 @@
 extends XRController3D
 
-var active_selection = null # Currently selected object
-var active_selection_pos = null # Original position of selected object
-var prev_selection = null
-var cur_selected = null
-var selections_list
-var offset = 0
-var resetJoystick: bool = true
 var left_controller_model = preload("res://Models/Quest2Controllers/OculusQuest2TouchController_Left.gltf")
 var right_controller_model = preload("res://Models/Quest2Controllers/OculusQuest2TouchController_Right.gltf")
 
@@ -14,37 +7,38 @@ var highlighted_collider: MeshInstance3D
 var selected: MeshInstance3D
 @onready var controllers = get_tree().get_nodes_in_group("controllers")
 
+# Currently not used
+var offset = 0
+var resetJoystick: bool = true
 
 func _ready() -> void:
 	print("Flashlight Technique Ready")
 
-
+# Sets quest 2 models to the correct hand
 func initialize():
-	active_selection = null
-	active_selection_pos = null
-	prev_selection = null
-	cur_selected = null
-	selections_list = []
 	offset = 0
 	resetJoystick = true
-	var left_controller_model_scene = left_controller_model.instantiate()
-	var right_controller_model_scene = right_controller_model.instantiate()
-	left_controller_model_scene.global_rotation = Vector3(0,deg_to_rad(180),0)
-	right_controller_model_scene.global_rotation = Vector3(0,deg_to_rad(180),0)
-	left_controller_model_scene.position = Vector3(0,0,.035)
-	right_controller_model_scene.position = Vector3(0,0,.035)
-	if get_parent().is_left: add_child(left_controller_model_scene)
-	else: add_child(right_controller_model_scene)
+	if get_parent().is_left: 
+		var left_controller_model_scene = left_controller_model.instantiate()
+		left_controller_model_scene.global_rotation = Vector3(0,deg_to_rad(180),0)
+		left_controller_model_scene.position = Vector3(0,0,.035)
+		add_child(left_controller_model_scene)
+	else: 
+		var right_controller_model_scene = right_controller_model.instantiate()
+		right_controller_model_scene.global_rotation = Vector3(0,deg_to_rad(180),0)
+		right_controller_model_scene.position = Vector3(0,0,.035)
+		add_child(right_controller_model_scene)
 	print("Flashlight reinitialized")
 
 
 
 func _process(delta: float) -> void:
-	if controllers[0].get_child(0).name == "Flashlight":
-		if $"ShapeCast3D".is_colliding():
-			highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
-			print("colliding with %s" % $"ShapeCast3D".get_collider(0).get_parent().name)
-			highlighted_collider.scale = Vector3(1.1, 1.1, 1.1)
+	#if controllers[0].get_child(0).name == "Flashlight":
+		if $"ShapeCast3D".is_colliding(): # Known bug to crash when swithcing between flashlight and bubble
+			if $"ShapeCast3D".get_collider(0): # <- helps protect against crashes I think but not perfect
+				highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
+				print("colliding with %s" % $"ShapeCast3D".get_collider(0).get_parent().name)
+				highlighted_collider.scale = Vector3(1.1, 1.1, 1.1)
 		elif highlighted_collider and !selected:
 			print("There was a collider but now there isnt")
 			highlighted_collider.scale = Vector3(1, 1, 1)
@@ -53,10 +47,9 @@ func _process(delta: float) -> void:
 		if selected:
 			update_selection_position()
 
-
+# Enable shapecast and make controllers visible
 func enable_selection():
 	print("enable selection")
-	# Enable shapecast and make controllers visible
 	var controllers = get_tree().get_nodes_in_group("controllers")
 	if controllers[0].get_child(0).name == "Flashlight":
 		print("%s controller is flashlight" % controllers[0])
@@ -70,9 +63,9 @@ func enable_selection():
 	selected.scale = Vector3(1, 1, 1)
 	selected.global_position = selected.get_meta("original_position")
 
+# Disable shapcecast and make controllers invisible
 func disable_selection():
 	print("disable selection")
-	# Disable shapcecast and make controllers invisible
 	if controllers[0].get_child(0).name == "Flashlight":
 		print("%s controller is flashlight" % controllers[0])
 		controllers[0].get_child(0).find_child("ShapeCast3D").enabled = false
