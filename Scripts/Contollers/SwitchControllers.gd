@@ -77,3 +77,7 @@ func _on_button_released(name: String) -> void:
 func _on_input_vector_2_changed(name: String, value: Vector2) -> void:
 	if current_controller_instance.has_method("_on_input_vector_2_changed"):
 			current_controller_instance.call("_on_input_vector_2_changed", name, value)
+
+func _on_input_float_changed(name: String, value: float) -> void:
+	if current_controller_instance.has_method("_on_input_float_changed"):
+		current_controller_instance.call("_on_input_float_changed", name, value)
