@@ -4,16 +4,15 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfof2fp6fy84k"
 path.s3tc="res://.godot/imported/9a3351c1.png-9b86400dece9c9322a1b72c9fcfde522.s3tc.ctex"
-path.etc2="res://.godot/imported/9a3351c1.png-9b86400dece9c9322a1b72c9fcfde522.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Models/Arm Cannon/9a3351c1.png"
-dest_files=["res://.godot/imported/9a3351c1.png-9b86400dece9c9322a1b72c9fcfde522.s3tc.ctex", "res://.godot/imported/9a3351c1.png-9b86400dece9c9322a1b72c9fcfde522.etc2.ctex"]
+dest_files=["res://.godot/imported/9a3351c1.png-9b86400dece9c9322a1b72c9fcfde522.s3tc.ctex"]
 
 [params]
 
