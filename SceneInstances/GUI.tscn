@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn6laar0b1t3p"]
+
+[ext_resource type="Script" path="res://Scripts/GUI.gd" id="1_cjb11"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2c0ap"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urpr7"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_2c0ap")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_05dqo"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_urpr7")
+size = Vector2(3, 2)
+
+[node name="Gui" type="Node3D"]
+script = ExtResource("1_cjb11")
+
+[node name="DisplayMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_05dqo")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+debug_draw = 1
+size = Vector2i(560, 320)
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="SubViewport/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+
+[node name="Orb1Label" type="Label" parent="SubViewport/Control/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Orb1
+0"
+horizontal_alignment = 1
+
+[node name="Orb2Label" type="Label" parent="SubViewport/Control/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Orb2
+0"
+horizontal_alignment = 1
