@@ -4,9 +4,8 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://5oo3oxekl72m"
 path.s3tc="res://.godot/imported/Coyote_Coyote_BaseColor.png-6d3dc0c7e5811599616f2e773aacf673.s3tc.ctex"
-path.etc2="res://.godot/imported/Coyote_Coyote_BaseColor.png-6d3dc0c7e5811599616f2e773aacf673.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -16,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Models/Animals/Coyote/Coyote_Coyote_BaseColor.png"
-dest_files=["res://.godot/imported/Coyote_Coyote_BaseColor.png-6d3dc0c7e5811599616f2e773aacf673.s3tc.ctex", "res://.godot/imported/Coyote_Coyote_BaseColor.png-6d3dc0c7e5811599616f2e773aacf673.etc2.ctex"]
+dest_files=["res://.godot/imported/Coyote_Coyote_BaseColor.png-6d3dc0c7e5811599616f2e773aacf673.s3tc.ctex"]
 
 [params]
 
