@@ -47,6 +47,7 @@ script = ExtResource("3_1aqbc")
 jetpack_scene = ExtResource("4_xcc3m")
 bubble_cursor_scene = ExtResource("5_jlwah")
 flashlight_scene = ExtResource("4_7fdne")
+is_left = true
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
 tracker = &"right_hand"

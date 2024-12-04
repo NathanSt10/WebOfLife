@@ -13,6 +13,12 @@ var resetJoystick: bool = true
 
 func _ready() -> void:
 	print("Flashlight Technique Ready")
+	if controllers[1].is_left:
+		controllers[1].connect("controller_switched", _on_left_controller_switched)
+		controllers[0].connect("controller_switched", _on_right_controller_switched)
+	else:
+		controllers[1].connect("controller_switched", _on_right_controller_switched)
+		controllers[0].connect("controller_switched", _on_left_controller_switched)
 
 # Sets quest 2 models to the correct hand
 func initialize():
@@ -33,19 +39,18 @@ func initialize():
 
 
 func _process(delta: float) -> void:
-	#if controllers[0].get_child(0).name == "Flashlight":
-		if $"ShapeCast3D".is_colliding(): # Known bug to crash when swithcing between flashlight and bubble
-			if $"ShapeCast3D".get_collider(0): # <- helps protect against crashes I think but not perfect
-				highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
-				print("colliding with %s" % $"ShapeCast3D".get_collider(0).get_parent().name)
-				highlighted_collider.scale = Vector3(1.1, 1.1, 1.1)
-		elif highlighted_collider and !selected:
-			print("There was a collider but now there isnt")
-			highlighted_collider.scale = Vector3(1, 1, 1)
-			highlighted_collider = null
-			
-		if selected:
-			update_selection_position()
+	if $"ShapeCast3D".is_colliding(): # Known bug to crash when swithcing between flashlight and bubble
+		if $"ShapeCast3D".get_collider(0): # <- helps protect against crashes I think but not perfect
+			highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
+			print("colliding with %s" % $"ShapeCast3D".get_collider(0).get_parent().name)
+			highlighted_collider.scale = Vector3(1.1, 1.1, 1.1)
+	elif highlighted_collider and !selected:
+		print("There was a collider but now there isnt")
+		highlighted_collider.scale = Vector3(1, 1, 1)
+		highlighted_collider = null
+		
+	if selected:
+		update_selection_position()
 
 # Enable shapecast and make controllers visible
 func enable_selection():
@@ -107,3 +112,21 @@ func _on_input_vector_2_changed(name: String, value: Vector2) -> void:
 		resetJoystick = false
 	if value.y > -0.1 and value.y < 0.1:
 		resetJoystick = true
+
+func _on_left_controller_switched(controller_type: String, is_left: bool):
+	print("Left Flashlight switched to Bubble")
+	if selected:
+		selected.scale = Vector3(1, 1, 1)
+		enable_selection()
+		selected = null
+	if highlighted_collider:
+		highlighted_collider.scale = Vector3(1, 1, 1)
+
+func _on_right_controller_switched(controller_type: String, is_left: bool):
+	print("Right Flashlight switched to Bubble")
+	if selected:
+		selected.scale = Vector3(1, 1, 1)
+		enable_selection()
+		selected = null
+	if highlighted_collider:
+		highlighted_collider.scale = Vector3(1, 1, 1)
