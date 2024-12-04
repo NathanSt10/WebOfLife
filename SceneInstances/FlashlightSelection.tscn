@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgrrsga8gyqvi"]
+[gd_scene load_steps=5 format=3 uid="uid://b0mkihg2r81ia"]
 
 [ext_resource type="Script" path="res://Scripts/Contollers/flashlightTechnique.gd" id="1_yxg7j"]
-[ext_resource type="PackedScene" uid="uid://bc8lh0rihgxvi" path="res://Models/Quest2Controllers/OculusQuest2TouchController_Right.gltf" id="2_ac0vi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7mn6f"]
 radius = 0.2
@@ -17,8 +16,7 @@ albedo_color = Color(1, 1, 0.309804, 0.0352941)
 emission_enabled = true
 emission = Color(1, 1, 0.52549, 1)
 
-[node name="RightController" type="XRController3D"]
-tracker = &"right_hand"
+[node name="Flashlight" type="XRController3D"]
 script = ExtResource("1_yxg7j")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
@@ -32,9 +30,3 @@ collide_with_bodies = false
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -15)
 mesh = SubResource("CapsuleMesh_l026r")
 surface_material_override/0 = SubResource("StandardMaterial3D_jcndo")
-
-[node name="OculusQuest2TouchController_Right" parent="." instance=ExtResource("2_ac0vi")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[connection signal="button_pressed" from="." to="." method="_on_button_pressed"]
-[connection signal="button_released" from="." to="." method="_on_button_released"]

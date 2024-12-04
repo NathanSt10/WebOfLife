@@ -11,8 +11,8 @@ var current_controller_type: String
 var current_controller_instance: Node = get_child(0) as XRController3D
 
 func _ready() -> void:
-	switch_to_controller("flashlight")
 	if name == "LeftController": is_left = true
+	switch_to_controller("flashlight")
 	print(name)
 
 
@@ -62,3 +62,22 @@ func _on_button_pressed(name: String) -> void:
 			switch_to_controller("flashlight")
 	if (name == "by_button"):
 		switch_to_controller("jetpack")
+		
+	if name == "grip_click":
+		if current_controller_instance.has_method("_on_button_pressed"):
+			current_controller_instance.call("_on_button_pressed", name)
+
+
+func _on_button_released(name: String) -> void:
+	if name == "grip_click":
+		if current_controller_instance.has_method("_on_button_released"):
+			current_controller_instance.call("_on_button_released", name)
+
+
+func _on_input_vector_2_changed(name: String, value: Vector2) -> void:
+	if current_controller_instance.has_method("_on_input_vector_2_changed"):
+			current_controller_instance.call("_on_input_vector_2_changed", name, value)
+
+func _on_input_float_changed(name: String, value: float) -> void:
+	if current_controller_instance.has_method("_on_input_float_changed"):
+		current_controller_instance.call("_on_input_float_changed", name, value)

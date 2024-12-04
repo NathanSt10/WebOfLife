@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://kb4efrgb2xfi"]
+[gd_scene load_steps=4 format=3 uid="uid://462lw4m3ef15"]
 
 [ext_resource type="Script" path="res://Scripts/Contollers/BubbleCursor.gd" id="1_jac6e"]
 [ext_resource type="Material" path="res://Materials/see-through.tres" id="2_7w0t3"]
@@ -19,5 +19,3 @@ material = ExtResource("2_7w0t3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGSphere3D/Area3D"]
 shape = SubResource("SphereShape3D_f21yc")
-
-[connection signal="input_float_changed" from="." to="." method="_on_input_float_changed"]
