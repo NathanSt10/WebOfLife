@@ -41,14 +41,15 @@ script = ExtResource("2_ktjwo")
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
-[node name="LeftController" type="XRController3D" parent="XROrigin3D"]
+[node name="LeftController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
 tracker = &"left_hand"
 script = ExtResource("3_1aqbc")
 jetpack_scene = ExtResource("4_xcc3m")
 bubble_cursor_scene = ExtResource("5_jlwah")
 flashlight_scene = ExtResource("4_7fdne")
+is_left = true
 
-[node name="RightController" type="XRController3D" parent="XROrigin3D"]
+[node name="RightController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
 tracker = &"right_hand"
 script = ExtResource("3_1aqbc")
 jetpack_scene = ExtResource("4_xcc3m")

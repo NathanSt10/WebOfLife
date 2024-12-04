@@ -4,16 +4,15 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0buycgve56fc"
 path.s3tc="res://.godot/imported/buttons.png-3119ca2ac70d5e484c2d1cc1ebb2e857.s3tc.ctex"
-path.etc2="res://.godot/imported/buttons.png-3119ca2ac70d5e484c2d1cc1ebb2e857.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Models/Quest2Controllers/buttons.png"
-dest_files=["res://.godot/imported/buttons.png-3119ca2ac70d5e484c2d1cc1ebb2e857.s3tc.ctex", "res://.godot/imported/buttons.png-3119ca2ac70d5e484c2d1cc1ebb2e857.etc2.ctex"]
+dest_files=["res://.godot/imported/buttons.png-3119ca2ac70d5e484c2d1cc1ebb2e857.s3tc.ctex"]
 
 [params]
 

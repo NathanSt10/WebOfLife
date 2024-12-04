@@ -16,6 +16,7 @@ rings = 20
 material = ExtResource("2_7w0t3")
 
 [node name="Area3D" type="Area3D" parent="CSGSphere3D"]
+collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGSphere3D/Area3D"]
 shape = SubResource("SphereShape3D_f21yc")
