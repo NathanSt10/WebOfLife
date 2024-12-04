@@ -19,5 +19,3 @@ material = ExtResource("2_7w0t3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGSphere3D/Area3D"]
 shape = SubResource("SphereShape3D_f21yc")
-
-[connection signal="input_float_changed" from="." to="." method="_on_input_float_changed"]
