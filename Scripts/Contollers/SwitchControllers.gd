@@ -47,7 +47,7 @@ func switch_to_controller(controller_type: String):
 		
 	add_child(current_controller_instance)
 	if current_controller_instance.has_method("initialize"):
-		current_controller_instance.call("initialize", tracker)
+		current_controller_instance.call("initialize")
 	emit_signal("controller_switched", current_controller_type, is_left)
 	# current_controller_instance.transform = Transform3D.IDENTITY
 
