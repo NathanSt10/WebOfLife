@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
 		highlighted_collider.scale = Vector3(1, 1, 1)
 		highlighted_collider = null
 		
+		
 	if selected:
 		update_selection_position()
 

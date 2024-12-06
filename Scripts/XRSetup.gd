@@ -1,4 +1,4 @@
-extends Node3D
+extends WorldEnvironment
 
 signal pose_recentered
 
