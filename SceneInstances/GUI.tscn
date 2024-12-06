@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bn6laar0b1t3p"]
+[gd_scene load_steps=12 format=3 uid="uid://bn6laar0b1t3p"]
 
 [ext_resource type="Script" path="res://Scripts/GUI.gd" id="1_cjb11"]
+[ext_resource type="Script" path="res://Scripts/GUIButton.gd" id="2_6l245"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2c0ap"]
 viewport_path = NodePath("SubViewport")
@@ -9,12 +10,31 @@ viewport_path = NodePath("SubViewport")
 resource_local_to_scene = true
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_2c0ap")
-billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_05dqo"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_urpr7")
 size = Vector2(3, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27puj"]
+albedo_color = Color(0, 0.968393, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rkevo"]
+material = SubResource("StandardMaterial3D_27puj")
+size = Vector3(0.5, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_54rnr"]
+size = Vector3(0.5, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oky0a"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8uc8p"]
+material = SubResource("StandardMaterial3D_oky0a")
+size = Vector3(0.5, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pddgw"]
+size = Vector3(0.5, 0.1, 0.1)
 
 [node name="Gui" type="Node3D"]
 script = ExtResource("1_cjb11")
@@ -57,3 +77,23 @@ layout_mode = 2
 text = "Orb2
 0"
 horizontal_alignment = 1
+
+[node name="Button1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.7, 0.05)
+mesh = SubResource("BoxMesh_rkevo")
+script = ExtResource("2_6l245")
+
+[node name="Area3D" type="Area3D" parent="Button1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button1/Area3D"]
+shape = SubResource("BoxShape3D_54rnr")
+
+[node name="Button2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.7, 0.05)
+mesh = SubResource("BoxMesh_8uc8p")
+script = ExtResource("2_6l245")
+
+[node name="Area3D" type="Area3D" parent="Button2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button2/Area3D"]
+shape = SubResource("BoxShape3D_pddgw")

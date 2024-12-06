@@ -15,13 +15,12 @@
 script = ExtResource("1_8eml7")
 
 [node name="Orb1" parent="WebHandler" instance=ExtResource("1_8owpl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80996, 0, -7.30873)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.92578, 4.25102, -10.648)
 animalName = "Orb1"
 
 [node name="Orb2" parent="WebHandler" instance=ExtResource("1_8owpl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99157, 0, -4.36347)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56462, 2.23569, -6.40547)
 animalName = "Orb2"
-population = 200
 
 [node name="XRRig" type="Node3D" parent="."]
 script = ExtResource("2_penjq")
@@ -49,4 +48,4 @@ environment = SubResource("Environment_cc07i")
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
 [node name="Gui" parent="WorldEnvironment" instance=ExtResource("6_q6lec")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1297, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.49394, 0, -2.59879)

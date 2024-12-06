@@ -2,30 +2,34 @@ extends Node3D
 
 @onready var orb_1: Orb = $Orb1
 @onready var orb_2: Orb = $Orb2
+@onready var gui: Node3D = $"../WorldEnvironment/Gui"
 
 var webDict = {"Orb1" : null,
 			   "Orb2" : null}
 			
 var frameInterval = 5.0
 var timeElapsed = 0.0
+var playSimulation = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Initialize this in a method/signal call. When an orb is placed, reparent into web and add reference
 	orb_1.inPosition.connect(_orb_in_position)
 	orb_2.inPosition.connect(_orb_in_position)
+	gui.togglePlay.connect(onTogglePlay)
+	gui.resetSimulation.connect(onResetSimulation)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	timeElapsed += delta
-	if(timeElapsed > frameInterval):
-		timeElapsed = 0.0
-		updateWeb()
+	if(playSimulation):
+		timeElapsed += delta
+		if(timeElapsed > frameInterval):
+			timeElapsed = 0.0
+			updateWeb()
 	
 func updateWeb():
 	for animal in webDict: #This is just getting the string identifier. Keep this in mind
-		
 		if (webDict[animal] != null):
 			#Orb 1
 			if (webDict[animal] == webDict["Orb1"]): #Change this to use animal name in orb
@@ -46,7 +50,15 @@ func updateWeb():
 				if(webDict[animal].population > 1):
 					webDict[animal].population += webDict[animal].population/2
 				print("Orb2: " + str(webDict[animal].population))
+				
 func _orb_in_position(animalName : String, orbRef : Node3D):
 	webDict[animalName] = orbRef
-	print(animalName)
+	
+func onTogglePlay():
+	playSimulation = !playSimulation
+	
+func onResetSimulation():
+	for animal in webDict:
+		if(webDict[animal] != null):
+			webDict[animal].currentPopulation = webDict[animal].initialPopulation
 			
