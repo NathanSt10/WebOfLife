@@ -10,14 +10,41 @@ signal controller_switched(controller_type: String, is_left: bool)
 var current_controller_type: String
 var current_controller_instance: Node = get_child(0) as XRController3D
 
+var leftGrabbed: Area3D
+var rightGrabbed: Area3D
+var initialDistanceBetweenHands: float
+var currentDistanceBetweenHands: float
+var scaleFactor = Vector3(1.0,1.0,1.0)
+var initialScale = Vector3(1.0,1.0,1.0)
+@onready var right_hand: XRController3D = $"../RightController"
+@onready var left_hand: XRController3D = $"../LeftController"
+
 func _ready() -> void:
 	if name == "LeftController": is_left = true
 	switch_to_controller("flashlight")
 	print(name)
+	current_controller_instance.connect("object_grabbed", _on_object_grabbed)
 
 
 func _process(delta: float) -> void:
-	pass
+	if leftGrabbed && rightGrabbed:
+		if leftGrabbed == rightGrabbed:
+			currentDistanceBetweenHands = left_hand.global_position.distance_to(right_hand.global_position)
+			scaleFactor = initialScale
+			scaleFactor *= currentDistanceBetweenHands / initialDistanceBetweenHands
+			leftGrabbed.scale = scaleFactor # Should not make a difference which hand is used to call this
+
+
+func _on_object_grabbed(grabbed):
+	if is_left:
+		leftGrabbed = grabbed
+	else:
+		rightGrabbed = grabbed
+	
+	if leftGrabbed && rightGrabbed:
+		if leftGrabbed == rightGrabbed:
+			initialDistanceBetweenHands = left_hand.global_position.distance_to(right_hand.global_position)
+			initialScale = grabbed.scale
 
 
 func switch_to_controller(controller_type: String):

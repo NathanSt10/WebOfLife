@@ -10,6 +10,7 @@ var hitbox: CollisionShape3D
 var area: Area3D  # Reference to the Area3D for detecting overlaps
 
 @onready var grab_sound = $GrabSound
+signal object_grabbed(grabbed_object)
 
 func _ready() -> void:
 	last_pos = global_transform.origin
@@ -42,7 +43,9 @@ func _on_input_float_changed(name: String, value: float) -> void:
 		var overlapping_areas = area.get_overlapping_areas()
 		if grabbed == null and overlapping_areas.size() > 0 and value >= 0.2:
 			grabbed = overlapping_areas[0].get_parent()  # Grabs the first overlapping area
+			emit_signal("object_grabbed", grabbed)
 			# grabbed.scale = Vector3(0.5, 0.5, 0.5)
 		elif grabbed != null and value < 0.2:
+			emit_signal("object_grabbed", null)
 			# grabbed.scale = Vector3.ONE
 			grabbed = null

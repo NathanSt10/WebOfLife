@@ -6,6 +6,7 @@ var right_controller_model = preload("res://Models/Quest2Controllers/OculusQuest
 var highlighted_collider: MeshInstance3D
 var selected: MeshInstance3D
 @onready var controllers = get_tree().get_nodes_in_group("controllers")
+signal object_grabbed(grabbed_object)
 
 # Currently not used
 var offset = 0
@@ -93,12 +94,14 @@ func _on_button_pressed(name: String) -> void:
 	if name == "grip_click" and highlighted_collider:
 		print("grip clicked")
 		selected = highlighted_collider
+		emit_signal("object_grabbed", selected)
 		selected.set_meta("original_position", highlighted_collider.global_position)
 		disable_selection()
 
 
 func _on_button_released(name: String) -> void:
 	if name == "grip_click" and selected:
+		emit_signal("object_grabbed", null)
 		print("Grip released")
 		enable_selection()
 		selected = null
