@@ -49,3 +49,6 @@ func _on_input_float_changed(name: String, value: float) -> void:
 			emit_signal("object_grabbed", null)
 			# grabbed.scale = Vector3.ONE
 			grabbed = null
+
+func set_grabbed_object(grabbed_object):
+	grabbed = grabbed_object

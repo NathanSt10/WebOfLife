@@ -10,41 +10,45 @@ signal controller_switched(controller_type: String, is_left: bool)
 var current_controller_type: String
 var current_controller_instance: Node = get_child(0) as XRController3D
 
-var leftGrabbed: Area3D
-var rightGrabbed: Area3D
+@onready var debugger = $"Debugger"
+
+#var leftGrabbed
+#var rightGrabbed
 var initialDistanceBetweenHands: float
 var currentDistanceBetweenHands: float
 var scaleFactor = Vector3(1.0,1.0,1.0)
 var initialScale = Vector3(1.0,1.0,1.0)
-@onready var right_hand: XRController3D = $"../RightController"
-@onready var left_hand: XRController3D = $"../LeftController"
+#@onready var right_hand: XRController3D = $"../RightController"
+#@onready var left_hand: XRController3D = $"../LeftController"
+
+var grabbed_object = null
+var other_controller: XRController3D
 
 func _ready() -> void:
 	if name == "LeftController": is_left = true
 	switch_to_controller("flashlight")
 	print(name)
-	current_controller_instance.connect("object_grabbed", _on_object_grabbed)
+	other_controller = get_node("../LeftController" if name == "RightController" else "../RightController")
 
 
 func _process(delta: float) -> void:
-	if leftGrabbed && rightGrabbed:
-		if leftGrabbed == rightGrabbed:
-			currentDistanceBetweenHands = left_hand.global_position.distance_to(right_hand.global_position)
-			scaleFactor = initialScale
-			scaleFactor *= currentDistanceBetweenHands / initialDistanceBetweenHands
-			leftGrabbed.scale = scaleFactor # Should not make a difference which hand is used to call this
+	if grabbed_object and grabbed_object == other_controller.grabbed_object:
+		update_bimanual_scaling()
 
+func grab_object(object):
+	grabbed_object = object
+	if grabbed_object and grabbed_object == other_controller.grabbed_object:
+		initialDistanceBetweenHands = global_position.distance_to(other_controller.global_position)
+		initialScale = grabbed_object.get_parent().scale
 
-func _on_object_grabbed(grabbed):
-	if is_left:
-		leftGrabbed = grabbed
-	else:
-		rightGrabbed = grabbed
-	
-	if leftGrabbed && rightGrabbed:
-		if leftGrabbed == rightGrabbed:
-			initialDistanceBetweenHands = left_hand.global_position.distance_to(right_hand.global_position)
-			initialScale = grabbed.scale
+func release_object():
+	grabbed_object = null
+
+func update_bimanual_scaling():
+	currentDistanceBetweenHands = global_position.distance_to(other_controller.global_position)
+	scaleFactor = initialScale * (currentDistanceBetweenHands / initialDistanceBetweenHands)
+	grabbed_object.get_parent().scale = scaleFactor
+	debugger.play()
 
 
 func switch_to_controller(controller_type: String):
@@ -73,6 +77,12 @@ func switch_to_controller(controller_type: String):
 			return # Invalid controller type
 		
 	add_child(current_controller_instance)
+	current_controller_instance.connect("object_grabbed", grab_object)
+	#if current_controller_instance.has_method("set_grabbed_object"):
+		#if is_left:
+			#current_controller_instance.call("set_grabbed_object", leftGrabbed)
+		#else:
+			#current_controller_instance.call("set_grabbed_object", rightGrabbed)
 	if current_controller_instance.has_method("initialize"):
 		current_controller_instance.call("initialize")
 	emit_signal("controller_switched", current_controller_type, is_left)

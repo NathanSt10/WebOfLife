@@ -133,3 +133,6 @@ func _on_right_controller_switched(controller_type: String, is_left: bool):
 		selected = null
 	if highlighted_collider:
 		highlighted_collider.scale = Vector3(1, 1, 1)
+
+func set_grabbed_object(grabbed_object):
+	selected = grabbed_object
