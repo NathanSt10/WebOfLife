@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://6gon1kvnlcmg"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_yec63"]
+[ext_resource type="Script" path="res://Scripts/Contollers/SwitchControllers.gd" id="2_7ml3o"]
+[ext_resource type="PackedScene" path="res://SceneInstances/JetpackController.tscn" id="3_6w86e"]
+[ext_resource type="PackedScene" path="res://SceneInstances/BubbleCursor.tscn" id="4_gkwik"]
+[ext_resource type="PackedScene" uid="uid://3dj2j3clgbuu" path="res://SceneInstances/FlashlightSelection.tscn" id="5_ua3ge"]
+[ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="6_yulgf"]
+[ext_resource type="Material" uid="uid://ds2dpvbpht0ea" path="res://addons/godot-xr-tools/hands/materials/labglove.tres" id="7_pprqd"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="8_uhkfj"]
+[ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="9_ax4pu"]
+
+[node name="XROrigin3D" type="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.55686)
+script = ExtResource("1_yec63")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LeftController" type="XRController3D" parent="." groups=["controllers"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21188, 0, 0)
+tracker = &"left_hand"
+script = ExtResource("2_7ml3o")
+jetpack_scene = ExtResource("3_6w86e")
+bubble_cursor_scene = ExtResource("4_gkwik")
+flashlight_scene = ExtResource("5_ua3ge")
+is_left = true
+
+[node name="LeftHand" parent="LeftController" instance=ExtResource("6_yulgf")]
+hand_material_override = ExtResource("7_pprqd")
+
+[node name="FunctionPickup" parent="LeftController" instance=ExtResource("8_uhkfj")]
+
+[node name="RightController" type="XRController3D" parent="." groups=["controllers"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155002, 0, 0)
+tracker = &"right_hand"
+script = ExtResource("2_7ml3o")
+jetpack_scene = ExtResource("3_6w86e")
+bubble_cursor_scene = ExtResource("4_gkwik")
+flashlight_scene = ExtResource("5_ua3ge")
+
+[node name="RightHand" parent="RightController" instance=ExtResource("9_ax4pu")]
+hand_material_override = ExtResource("7_pprqd")
+
+[node name="FunctionPickup" parent="RightController" instance=ExtResource("8_uhkfj")]
+ranged_enable = false
+
+[connection signal="button_pressed" from="LeftController" to="LeftController" method="_on_button_pressed"]
+[connection signal="button_released" from="LeftController" to="LeftController" method="_on_button_released"]
+[connection signal="input_float_changed" from="LeftController" to="LeftController" method="_on_input_float_changed"]
+[connection signal="input_vector2_changed" from="LeftController" to="LeftController" method="_on_input_vector_2_changed"]
+[connection signal="button_pressed" from="RightController" to="RightController" method="_on_button_pressed"]
+[connection signal="button_released" from="RightController" to="RightController" method="_on_button_released"]
+[connection signal="input_float_changed" from="RightController" to="RightController" method="_on_input_float_changed"]
+[connection signal="input_vector2_changed" from="RightController" to="RightController" method="_on_input_vector_2_changed"]

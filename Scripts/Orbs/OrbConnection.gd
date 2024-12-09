@@ -5,6 +5,7 @@ var line_renderer = preload("res://Scripts/Orbs/LineRenderer.gd")
 @onready var fox = $"FoxOrb"
 
 func _ready() -> void:
+	print("Ready is creating threads for predators")
 	var predator_list = [coyote, fox]
 	for predator in predator_list:
 		create_orb_thread(predator) 
@@ -18,21 +19,19 @@ func _process(delta: float) -> void:
 # This *should*/could run in a for loop where each iteration is a predetermined connection of the animal
 func create_orb_thread(predator): 
 	var prey_list = get_children()
+	print("creating orb threads")
+	print("prey list: ", prey_list)
 	for prey in prey_list:
 		if predator == prey: continue
-		
-		# Create raycast whose parent is a prey and will point its predator
+		print("Current prey: ", prey.name)
+		# Create raycast whose parent is a prey and will point to its predator
 		# upon update_threads() being called
 		var prey_raycast_to_predator = RayCast3D.new()
-		prey_raycast_to_predator.collide_with_areas = true
-		prey_raycast_to_predator.collide_with_bodies = false
 		prey.add_child(prey_raycast_to_predator)
 		
 		# Create raycast whose parent is a predator and will point to its prey
 		# upon update_threads() being called
 		var predator_raycast_to_prey = RayCast3D.new()
-		predator_raycast_to_prey.collide_with_areas = true
-		predator_raycast_to_prey.collide_with_bodies = false
 		predator.add_child(predator_raycast_to_prey)
 		
 		# Create a thread whose parent is prey
@@ -52,7 +51,7 @@ func update_threads():
 	var animal_list = get_children()
 	for animal in animal_list:
 		for thread in animal.get_children():
-			if thread is not MeshInstance3D: continue
+			if thread is not MeshInstance3D or thread.name == "GlassMesh": continue
 			
 			var thread_connection = thread.get_meta("target_orb")
 			
@@ -61,11 +60,12 @@ func update_threads():
 			
 			# Raycast of prey pointing to predator
 			var animal_raycast_to_predator = thread.get_meta("preys_raycast")
-			
+
 			# Setting destination of raycasts
-			predator_raycast_to_animal.target_position = animal.global_position - thread_connection.global_position
-			animal_raycast_to_predator.target_position = thread_connection.global_position - animal.global_position
-			
+			#predator_raycast_to_animal.target_position = animal.global_position - thread_connection.global_position
+			#animal_raycast_to_predator.target_position = thread_connection.global_position - animal.global_position
+			predator_raycast_to_animal.target_position = (animal.global_transform.origin - thread_connection.global_transform.origin)
+			animal_raycast_to_predator.target_position = (thread_connection.global_transform.origin - animal.global_transform.origin)
 			# Setting points of thread generation
 			thread.points[0] = predator_raycast_to_animal.get_collision_point()
 			thread.points[1] = animal_raycast_to_predator.get_collision_point()

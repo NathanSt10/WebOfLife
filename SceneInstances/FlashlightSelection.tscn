@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0mkihg2r81ia"]
+[gd_scene load_steps=5 format=3 uid="uid://3dj2j3clgbuu"]
 
 [ext_resource type="Script" path="res://Scripts/Contollers/flashlightTechnique.gd" id="1_yxg7j"]
 
