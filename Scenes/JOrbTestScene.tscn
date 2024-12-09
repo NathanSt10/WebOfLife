@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0iy0pblnh6wq"]
+[gd_scene load_steps=13 format=3 uid="uid://b0iy0pblnh6wq"]
 
 [ext_resource type="Script" path="res://Scripts/WebHandler.gd" id="1_8eml7"]
 [ext_resource type="PackedScene" uid="uid://caxcapgoijnvn" path="res://SceneInstances/JTestOrb.tscn" id="1_8owpl"]
+[ext_resource type="Script" path="res://Scripts/XRSetup.gd" id="1_rago7"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="4_8i3cy"]
 [ext_resource type="Script" path="res://Scripts/Contollers/SwitchControllers.gd" id="5_rmm04"]
 [ext_resource type="PackedScene" uid="uid://bfgjo42yw61v2" path="res://SceneInstances/JetpackController.tscn" id="6_1deec"]
@@ -19,6 +20,29 @@ material = SubResource("StandardMaterial3D_ghqg6")
 size = Vector3(100, 0.1, 100)
 
 [node name="JOrbTestSceneHandler" type="Node3D"]
+script = ExtResource("1_rago7")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.55686)
+script = ExtResource("4_8i3cy")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LeftController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
+tracker = &"left_hand"
+script = ExtResource("5_rmm04")
+jetpack_scene = ExtResource("6_1deec")
+bubble_cursor_scene = ExtResource("7_b7nvw")
+flashlight_scene = ExtResource("8_eq0tg")
+is_left = true
+
+[node name="RightController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
+tracker = &"right_hand"
+script = ExtResource("5_rmm04")
+jetpack_scene = ExtResource("6_1deec")
+bubble_cursor_scene = ExtResource("7_b7nvw")
+flashlight_scene = ExtResource("8_eq0tg")
 
 [node name="WebHandler" type="Node3D" parent="."]
 script = ExtResource("1_8eml7")
@@ -44,28 +68,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.49394, 1.98214, -2.59879)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment"]
 mesh = SubResource("BoxMesh_hkfps")
-
-[node name="XROrigin3D" type="XROrigin3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.55686)
-script = ExtResource("4_8i3cy")
-
-[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
-
-[node name="LeftController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
-tracker = &"left_hand"
-script = ExtResource("5_rmm04")
-jetpack_scene = ExtResource("6_1deec")
-bubble_cursor_scene = ExtResource("7_b7nvw")
-flashlight_scene = ExtResource("8_eq0tg")
-is_left = true
-
-[node name="RightController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
-tracker = &"right_hand"
-script = ExtResource("5_rmm04")
-jetpack_scene = ExtResource("6_1deec")
-bubble_cursor_scene = ExtResource("7_b7nvw")
-flashlight_scene = ExtResource("8_eq0tg")
 
 [connection signal="button_pressed" from="XROrigin3D/LeftController" to="XROrigin3D/LeftController" method="_on_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/LeftController" to="XROrigin3D/LeftController" method="_on_button_released"]
