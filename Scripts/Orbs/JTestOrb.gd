@@ -1,15 +1,15 @@
 class_name Orb extends Node3D
 
-var animalName = "default"
-var orbVelocity = 2.0
-var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
-var moved = false #Change this to true when the orb is moved or placed. Change to false after locking in
-@export var population = 100
+@export var animalName = "default"
+@export var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
+var moved = true #Change this to true when the orb is moved or placed. Change to false after locking in
+@export var initialPopulation = 100
+var population
 
 signal inPosition
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	population = initialPopulation
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,8 +19,8 @@ func _process(delta: float) -> void:
 	if(moved):
 		var lastPos = global_position
 		global_position = global_position.slerp(goalLoc, 2*delta)
-		if(lastPos == global_position): #Update this by adding an area3d that emits the signal when entered.
+		if(global_position.distance_to(goalLoc) < 0.001): #Update this by adding an area3d that emits the signal when entered.
 			moved = false
-			inPosition.emit(animalName)
+			inPosition.emit(animalName, self)
 	
 	

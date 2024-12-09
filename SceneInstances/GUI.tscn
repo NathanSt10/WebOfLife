@@ -1,0 +1,157 @@
+[gd_scene load_steps=19 format=3 uid="uid://bn6laar0b1t3p"]
+
+[ext_resource type="Script" path="res://Scripts/GUI.gd" id="1_cjb11"]
+[ext_resource type="Script" path="res://Scripts/GUIButton.gd" id="2_6l245"]
+[ext_resource type="BoxMesh" uid="uid://cksfchaox0peo" path="res://Materials/ButtonHighlightMesh.tres" id="3_hdne4"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2c0ap"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urpr7"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_2c0ap")
+
+[sub_resource type="QuadMesh" id="QuadMesh_05dqo"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_urpr7")
+size = Vector2(3, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61q68"]
+bg_color = Color(0.0738226, 0.083962, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glbwi"]
+bg_color = Color(1.54018e-06, 0.703717, 0.993119, 1)
+
+[sub_resource type="Theme" id="Theme_fwy1e"]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 0
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
+Label/constants/shadow_outline_size = 0
+Label/font_sizes/font_size = 16
+Label/styles/normal = SubResource("StyleBoxFlat_61q68")
+Panel/styles/panel = SubResource("StyleBoxFlat_glbwi")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27puj"]
+albedo_color = Color(0, 0.968393, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rkevo"]
+material = SubResource("StandardMaterial3D_27puj")
+size = Vector3(0.5, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_54rnr"]
+size = Vector3(0.5, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oky0a"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8uc8p"]
+material = SubResource("StandardMaterial3D_oky0a")
+size = Vector3(0.5, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pddgw"]
+size = Vector3(0.5, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g0qid"]
+size = Vector3(3, 2, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qfmd"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_61o1p"]
+material = SubResource("StandardMaterial3D_7qfmd")
+flip_faces = true
+size = Vector2(3, 2)
+
+[node name="Gui" type="Node3D"]
+script = ExtResource("1_cjb11")
+
+[node name="DisplayMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_05dqo")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+debug_draw = 1
+size = Vector2i(560, 320)
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="SubViewport/Control"]
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 0
+offset_right = 560.0
+offset_bottom = 320.0
+theme = SubResource("Theme_fwy1e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control/Panel"]
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 0
+offset_right = 560.0
+offset_bottom = 320.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 2
+
+[node name="Orb1Label" type="Label" parent="SubViewport/Control/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Orb1
+0"
+horizontal_alignment = 1
+
+[node name="Orb2Label" type="Label" parent="SubViewport/Control/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Orb2
+0"
+horizontal_alignment = 1
+
+[node name="Button1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.7, 0.06)
+mesh = SubResource("BoxMesh_rkevo")
+script = ExtResource("2_6l245")
+
+[node name="Area3D" type="Area3D" parent="Button1"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button1/Area3D"]
+shape = SubResource("BoxShape3D_54rnr")
+
+[node name="ButtonHighlight" type="MeshInstance3D" parent="Button1"]
+visible = false
+mesh = ExtResource("3_hdne4")
+
+[node name="Button2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.7, 0.06)
+mesh = SubResource("BoxMesh_8uc8p")
+script = ExtResource("2_6l245")
+
+[node name="Area3D" type="Area3D" parent="Button2"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button2/Area3D"]
+shape = SubResource("BoxShape3D_pddgw")
+
+[node name="ButtonHighlight" type="MeshInstance3D" parent="Button2"]
+visible = false
+mesh = ExtResource("3_hdne4")
+
+[node name="GUIGrabbingArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GUIGrabbingArea"]
+shape = SubResource("BoxShape3D_g0qid")
+
+[node name="GUIBack" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_61o1p")
+
+[connection signal="area_entered" from="Button1/Area3D" to="Button1" method="_on_area_entered"]
+[connection signal="area_exited" from="Button1/Area3D" to="Button1" method="_on_area_exited"]
+[connection signal="area_entered" from="Button2/Area3D" to="Button2" method="_on_area_entered"]
+[connection signal="area_exited" from="Button2/Area3D" to="Button2" method="_on_area_exited"]
