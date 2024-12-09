@@ -13,10 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://b3pr0ff3ly0b3" path="res://Models/Animals/Duck/Duck.glb" id="9_6i68h"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="9_faohc"]
 [ext_resource type="PackedScene" uid="uid://bvuii2i1lenug" path="res://Models/Animals/Coyote/Coyote.glb" id="11_s8fai"]
-[ext_resource type="Script" path="res://Scenes/AnimalRotationAnimation.gd" id="12_v8w7s"]
+[ext_resource type="Script" path="res://Scripts/AnimalRotationAnimation.gd" id="12_v8w7s"]
 [ext_resource type="PackedScene" uid="uid://bt3wx7n2eoi8k" path="res://Models/Placeholder/Pipe.glb" id="14_h3s36"]
 [ext_resource type="PackedScene" uid="uid://cst10dxve45ev" path="res://Models/Placeholder/wooden bookshelf.glb" id="15_mmyvt"]
-[ext_resource type="PackedScene" uid="uid://bm2agusvnx60o" path="res://SceneInstances/OrbPickable.tscn" id="20_g53nn"]
+[ext_resource type="PackedScene" path="res://SceneInstances/OrbPickable.tscn" id="20_g53nn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5cj7l"]
 sky_top_color = Color(0.384314, 0.454902, 0.713726, 1)
