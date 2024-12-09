@@ -18,7 +18,7 @@ var initialDistanceBetweenHands: float
 var currentDistanceBetweenHands: float
 var scaleFactor = Vector3(1.0,1.0,1.0)
 var initialScale = Vector3(1.0,1.0,1.0)
-@export var max_scale: Vector3 = Vector3(3.0, 3.0, 3.0) # Maximum allowed scale
+@export var max_scale: Vector3 = Vector3(2.0, 2.0, 2.0) # Maximum allowed scale
 
 #@onready var right_hand: XRController3D = $"../RightController"
 #@onready var left_hand: XRController3D = $"../LeftController"
@@ -38,18 +38,15 @@ func _process(delta: float) -> void:
 		update_bimanual_scaling()
 
 func grab_object(object):
+	#debugger.play()
 	grabbed_object = object
 	if grabbed_object and grabbed_object == other_controller.grabbed_object:
+		debugger.play()
 		initialDistanceBetweenHands = global_position.distance_to(other_controller.global_position)
 		initialScale = grabbed_object.scale
 
-func release_object():
-	grabbed_object = null
 
 func update_bimanual_scaling():
-	if not grabbed_object:
-		return
-	
 	currentDistanceBetweenHands = global_position.distance_to(other_controller.global_position)
 	scaleFactor = initialScale * (currentDistanceBetweenHands / initialDistanceBetweenHands)
 	
@@ -59,6 +56,7 @@ func update_bimanual_scaling():
 	scaleFactor.z = min(scaleFactor.z, max_scale.z)
 	
 	grabbed_object.scale = scaleFactor
+	grabbed_object.set_meta("original_scale", grabbed_object.scale)
 	# debugger.play()
 
 
