@@ -66,7 +66,8 @@ func enable_selection():
 		controllers[1].get_child(0).find_child("ShapeCast3D").enabled = true
 		controllers[1].get_child(0).visible = true
 	
-	selected.scale = Vector3(1, 1, 1)
+	if selected and selected.has_meta("current_scale"):
+		selected.scale = selected.get_meta("current_scale")
 	selected.global_position = selected.get_meta("original_position")
 
 # Disable shapcecast and make controllers invisible
@@ -81,8 +82,8 @@ func disable_selection():
 		controllers[1].get_child(0).find_child("ShapeCast3D").enabled = false
 		controllers[1].get_child(0).visible = false
 	
-	print("setting scale to .5")
-	selected.scale = Vector3(0.5, 0.5, 0.5)
+	if selected:
+		selected.set_meta("current_scale", selected.scale)
 
 
 func update_selection_position():
@@ -119,7 +120,8 @@ func _on_input_vector_2_changed(name: String, value: Vector2) -> void:
 func _on_left_controller_switched(controller_type: String, is_left: bool):
 	print("Left Flashlight switched to Bubble")
 	if selected:
-		selected.scale = Vector3(1, 1, 1)
+		if selected.has_meta("current_scale"):
+			selected.scale = selected.get_meta("current_scale")
 		enable_selection()
 		selected = null
 	if highlighted_collider:
@@ -128,7 +130,8 @@ func _on_left_controller_switched(controller_type: String, is_left: bool):
 func _on_right_controller_switched(controller_type: String, is_left: bool):
 	print("Right Flashlight switched to Bubble")
 	if selected:
-		selected.scale = Vector3(1, 1, 1)
+		if selected.has_meta("current_scale"):
+			selected.scale = selected.get_meta("current_scale")
 		enable_selection()
 		selected = null
 	if highlighted_collider:
