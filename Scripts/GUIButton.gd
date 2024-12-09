@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var gui: Node3D = $"."
-@onready var button_highlight: MeshInstance3D = $Button1Highlight
+@onready var button_highlight: MeshInstance3D = $ButtonHighlight
 var buttonHighlighted = false
 var lockInput = false #Prevents signal from being sent without reselecting the button
 var timeElapsed = 0.0
@@ -15,6 +15,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #Selection input is mediocre at best. A queue could possibly be implemented to make it so toggling
 #time can persist across hands, but it's incredibly unneccessary right now
+#Stack implementation: When a controller enters the area, add some random value to stack.
+#Timer counts when stack isn't empty. Exiting the area removes an element from the stack.
+#Controllers should have multiple collision layers. One could be for orbs, two for GUI
 func _process(delta: float) -> void:
 	if(buttonHighlighted and !lockInput):
 		timeElapsed += delta

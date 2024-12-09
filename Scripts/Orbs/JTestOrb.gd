@@ -4,12 +4,12 @@ class_name Orb extends Node3D
 @export var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
 var moved = true #Change this to true when the orb is moved or placed. Change to false after locking in
 @export var initialPopulation = 100
-var currentPopulation
+var population
 
 signal inPosition
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	currentPopulation = initialPopulation
+	population = initialPopulation
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

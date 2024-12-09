@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bn6laar0b1t3p"]
+[gd_scene load_steps=19 format=3 uid="uid://bn6laar0b1t3p"]
 
 [ext_resource type="Script" path="res://Scripts/GUI.gd" id="1_cjb11"]
 [ext_resource type="Script" path="res://Scripts/GUIButton.gd" id="2_6l245"]
@@ -16,6 +16,25 @@ albedo_texture = SubResource("ViewportTexture_2c0ap")
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_urpr7")
 size = Vector2(3, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61q68"]
+bg_color = Color(0.0738226, 0.083962, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glbwi"]
+bg_color = Color(1.54018e-06, 0.703717, 0.993119, 1)
+
+[sub_resource type="Theme" id="Theme_fwy1e"]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 0
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
+Label/constants/shadow_outline_size = 0
+Label/font_sizes/font_size = 16
+Label/styles/normal = SubResource("StyleBoxFlat_61q68")
+Panel/styles/panel = SubResource("StyleBoxFlat_glbwi")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27puj"]
 albedo_color = Color(0, 0.968393, 0, 1)
@@ -68,6 +87,7 @@ custom_minimum_size = Vector2(560, 320)
 layout_mode = 0
 offset_right = 560.0
 offset_bottom = 320.0
+theme = SubResource("Theme_fwy1e")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control/Panel"]
 custom_minimum_size = Vector2(560, 320)
@@ -102,7 +122,7 @@ collision_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Button1/Area3D"]
 shape = SubResource("BoxShape3D_54rnr")
 
-[node name="Button1Highlight" type="MeshInstance3D" parent="Button1"]
+[node name="ButtonHighlight" type="MeshInstance3D" parent="Button1"]
 visible = false
 mesh = ExtResource("3_hdne4")
 
@@ -117,11 +137,13 @@ collision_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Button2/Area3D"]
 shape = SubResource("BoxShape3D_pddgw")
 
-[node name="Button2Highlight" type="MeshInstance3D" parent="Button2"]
+[node name="ButtonHighlight" type="MeshInstance3D" parent="Button2"]
 visible = false
 mesh = ExtResource("3_hdne4")
 
 [node name="GUIGrabbingArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GUIGrabbingArea"]
 shape = SubResource("BoxShape3D_g0qid")
