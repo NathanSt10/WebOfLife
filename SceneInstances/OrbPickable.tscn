@@ -49,8 +49,6 @@ lock_rotation = true
 freeze = true
 freeze_mode = 0
 ranged_grab_method = 2
-return_to_original_position = null
-picked_up_scale = null
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("SphereShape3D_ryrcw")
@@ -68,10 +66,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_sh48n")
 
 [node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("3_82k3i")]
 transform = Transform3D(0.957082, -0.261495, -0.124953, 0.263406, 0.964684, -0.00127578, 0.120873, -0.0316922, 0.992162, -0.237, 0, -0.083)
-visible = true
 hand_pose = SubResource("Resource_dxivq")
 
 [node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("6_rg11j")]
 transform = Transform3D(0.947129, 0.302982, 0.105591, -0.304444, 0.952527, -0.00237743, -0.101299, -0.0298948, 0.994407, 0.237994, 0, -0.0824523)
-visible = true
 hand_pose = SubResource("Resource_cuxot")
