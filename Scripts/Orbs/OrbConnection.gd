@@ -51,6 +51,7 @@ func create_orb_thread(predator):
 func update_threads():
 	var animal_list = get_children()
 	for animal in animal_list:
+		if animal.name == "MultiplayerSynchronizer": continue
 		for thread in animal.get_children():
 			if thread is not MeshInstance3D: continue
 			

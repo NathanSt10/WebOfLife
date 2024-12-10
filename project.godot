@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="WebOfLife"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="res://Scenes/Lobby.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,7 @@ import/blender/enabled=false
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 
 [xr]
 

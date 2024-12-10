@@ -3,7 +3,7 @@ extends Node
 var player_scene = preload("res://SceneInstances/Rig.tscn")
 
 @export var is_server = false
-@export var address = 0
+@export var address = "0"
 const PORT = 6729
 
 var rng = RandomNumberGenerator.new()

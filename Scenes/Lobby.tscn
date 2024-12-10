@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://42gd67j7t7j1"]
+[gd_scene load_steps=16 format=3 uid="uid://42gd67j7t7j1"]
 
 [ext_resource type="Script" path="res://Scripts/XRSetup.gd" id="1_ii4n0"]
+[ext_resource type="Script" path="res://Scripts/Network/IPAddress.gd" id="4_e3306"]
 [ext_resource type="Script" path="res://Scripts/Network/StartServer.gd" id="8_eeqix"]
 [ext_resource type="Script" path="res://Scripts/Network/JoinServer.gd" id="9_p161x"]
 
@@ -125,6 +126,9 @@ shape = SubResource("SphereShape3D_sh3ve")
 [node name="Label3D" type="Label3D" parent="Join"]
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0, 0.75, 0)
 text = "Join"
+
+[node name="Label3D" type="Label3D" parent="."]
+script = ExtResource("4_e3306")
 
 [connection signal="area_entered" from="Host/Area3D" to="Host" method="_on_area_3d_area_entered"]
 [connection signal="area_shape_entered" from="Host/Area3D" to="Host" method="_on_area_3d_area_shape_entered"]

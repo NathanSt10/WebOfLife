@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ciphu7ctboar1"]
+[gd_scene load_steps=14 format=3 uid="uid://ciphu7ctboar1"]
 
 [ext_resource type="Script" path="res://Scripts/XRSetup.gd" id="1_ijei3"]
 [ext_resource type="Script" path="res://Scripts/Orbs/OrbConnection.gd" id="5_vwttx"]
@@ -25,6 +25,11 @@ sky = SubResource("Sky_sqtp2")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l7vjb"]
 size = Vector3(10000, 0, 10000)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ucbmt"]
+properties/0/path = NodePath("Web/DeerOrb:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Main" type="Node3D"]
 
@@ -77,3 +82,7 @@ skeleton = NodePath("../..")
 
 [node name="Coyote" parent="Web/CoyoteOrb" instance=ExtResource("11_s8fai")]
 transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, -0.287247, -0.00311545)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Web"]
+root_path = NodePath("../..")
+replication_config = SubResource("SceneReplicationConfig_ucbmt")
