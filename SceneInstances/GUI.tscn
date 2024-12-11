@@ -59,6 +59,12 @@ size = Vector3(0.5, 0.1, 0.1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_pddgw"]
 size = Vector3(0.5, 0.1, 0.1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_ftehc"]
+size = Vector3(0.5, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gi7eq"]
+size = Vector3(0.5, 0.1, 0.1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_g0qid"]
 size = Vector3(3, 2, 0.1)
 
@@ -68,12 +74,6 @@ size = Vector3(3, 2, 0.1)
 material = SubResource("StandardMaterial3D_7qfmd")
 flip_faces = true
 size = Vector2(3, 2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ftehc"]
-size = Vector3(0.5, 0.1, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gi7eq"]
-size = Vector3(0.5, 0.1, 0.1)
 
 [node name="Gui" type="Node3D"]
 script = ExtResource("1_cjb11")
@@ -123,6 +123,7 @@ horizontal_alignment = 1
 [node name="InstructionLabel" type="Label" parent="SubViewport/Control/Panel"]
 top_level = true
 custom_minimum_size = Vector2(560, 320)
+layout_mode = 0
 offset_right = 560.0
 offset_bottom = 320.0
 text = "
@@ -149,6 +150,7 @@ script = ExtResource("2_6l245")
 
 [node name="Area3D" type="Area3D" parent="Button1"]
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Button1/Area3D"]
 shape = SubResource("BoxShape3D_54rnr")
@@ -164,6 +166,7 @@ script = ExtResource("2_6l245")
 
 [node name="Area3D" type="Area3D" parent="Button2"]
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Button2/Area3D"]
 shape = SubResource("BoxShape3D_pddgw")
@@ -172,7 +175,24 @@ shape = SubResource("BoxShape3D_pddgw")
 visible = false
 mesh = ExtResource("3_hdne4")
 
+[node name="Button3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0.06)
+mesh = SubResource("BoxMesh_ftehc")
+script = ExtResource("2_6l245")
+
+[node name="Area3D" type="Area3D" parent="Button3"]
+collision_layer = 3
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button3/Area3D"]
+shape = SubResource("BoxShape3D_gi7eq")
+
+[node name="ButtonHighlight" type="MeshInstance3D" parent="Button3"]
+visible = false
+mesh = ExtResource("3_hdne4")
+
 [node name="GUIGrabbingArea" type="Area3D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 0
 
@@ -181,21 +201,6 @@ shape = SubResource("BoxShape3D_g0qid")
 
 [node name="GUIBack" type="MeshInstance3D" parent="."]
 mesh = SubResource("QuadMesh_61o1p")
-
-[node name="Button3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0.06)
-mesh = SubResource("BoxMesh_ftehc")
-script = ExtResource("2_6l245")
-
-[node name="Area3D" type="Area3D" parent="Button3"]
-collision_layer = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Button3/Area3D"]
-shape = SubResource("BoxShape3D_gi7eq")
-
-[node name="ButtonHighlight" type="MeshInstance3D" parent="Button3"]
-visible = false
-mesh = ExtResource("3_hdne4")
 
 [connection signal="area_entered" from="Button1/Area3D" to="Button1" method="_on_area_entered"]
 [connection signal="area_exited" from="Button1/Area3D" to="Button1" method="_on_area_exited"]

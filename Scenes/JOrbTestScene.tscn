@@ -49,13 +49,15 @@ script = ExtResource("1_8eml7")
 
 [node name="Orb1" parent="WebHandler" instance=ExtResource("1_8owpl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34575, 4.25102, -10.648)
+layers = 3
 animalName = "Orb1"
-goalLoc = Vector3(3, 1, -1)
+goalLoc = Vector3(-3, 1, -1)
 
 [node name="Orb2" parent="WebHandler" instance=ExtResource("1_8owpl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56462, 2.23569, -6.40547)
+layers = 3
 animalName = "Orb2"
-goalLoc = Vector3(2, 1, -1)
+goalLoc = Vector3(-4, 1, -1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cc07i")

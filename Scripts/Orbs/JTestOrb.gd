@@ -3,6 +3,7 @@ class_name Orb extends Node3D
 @export var animalName = "default"
 @export var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
 var moved = true #Change this to true when the orb is moved or placed. Change to false after locking in
+var lastPos = Vector3(0.0,0.0,0.0)
 var initialPopulation = 200
 var population
 var lastScale = 1.0 #To prevent constant updating. Could be handled with controllers I think
@@ -18,11 +19,15 @@ func _process(delta: float) -> void:
 	#It's not exactly reaching the goalLoc. Just fix this in the handler.
 	#Once position stops updating, send a signal that says it's done moving
 	if(moved):
-		var lastPos = global_position
 		global_position = global_position.slerp(goalLoc, 2*delta)
 		if(global_position.distance_to(goalLoc) < 0.001): #Update this by adding an area3d that emits the signal when entered.
 			moved = false
+			lastPos = global_position
 			inPosition.emit(animalName, self)
+	else:
+		moved = (lastPos == global_position)
+		lastPos = global_position
+		
 	#Scale handling
 	if(lastScale != global_scale):
 		#Scale should be the same for all values, so this is a work around
