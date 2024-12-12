@@ -5,7 +5,7 @@ extends Node3D
 var buttonHighlighted = false
 var lockInput = false #Prevents signal from being sent without reselecting the button
 var timeElapsed = 0.0
-var toggleTime = 3.0
+var toggleTime = 1.5
 signal buttonInput
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 		if(timeElapsed >= toggleTime):
 			buttonInput.emit(self)
 			lockInput = true
+			button_highlight.visible = false
 	
 	
 func _on_area_entered(area: Area3D):

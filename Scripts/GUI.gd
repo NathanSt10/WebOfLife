@@ -19,6 +19,7 @@ signal resetSimulation
 func _ready() -> void:
 	button_1.buttonInput.connect(handleButton)
 	button_2.buttonInput.connect(handleButton)
+	button_3.buttonInput.connect(handleButton)
 	
 
 

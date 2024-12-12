@@ -1,0 +1,115 @@
+[gd_scene load_steps=18 format=3 uid="uid://bbosiw7pc21r3"]
+
+[ext_resource type="Script" path="res://Scripts/XRSetup.gd" id="1_2b3gi"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="2_bqc7i"]
+[ext_resource type="Script" path="res://Scripts/Contollers/SwitchControllers.gd" id="3_m6sqp"]
+[ext_resource type="PackedScene" uid="uid://bfgjo42yw61v2" path="res://SceneInstances/JetpackController.tscn" id="4_oc6n4"]
+[ext_resource type="PackedScene" uid="uid://c0fia5kqtyu4c" path="res://SceneInstances/JBubbleCursor.tscn" id="5_2nd18"]
+[ext_resource type="PackedScene" uid="uid://dmkjj2o6d4yle" path="res://SceneInstances/JFlashlightSelection.tscn" id="6_s083v"]
+[ext_resource type="Script" path="res://Scripts/Orbs/OrbConnection.gd" id="7_j41m3"]
+[ext_resource type="PackedScene" uid="uid://bjcmeh163cu7o" path="res://SceneInstances/Orb.tscn" id="8_lwjt6"]
+[ext_resource type="PackedScene" uid="uid://d2ny4h0w312eh" path="res://Models/Animals/Deer/Deer.glb" id="9_7eqr1"]
+[ext_resource type="PackedScene" uid="uid://bembmau1gxhyb" path="res://Models/Animals/Fox/Fox.glb" id="10_i4ldd"]
+[ext_resource type="PackedScene" uid="uid://b3pr0ff3ly0b3" path="res://Models/Animals/Duck/Duck.glb" id="11_aehqm"]
+[ext_resource type="PackedScene" uid="uid://c4j4xocvlth1f" path="res://Models/Animals/Squirrel/Squirrel.glb" id="12_6il63"]
+[ext_resource type="PackedScene" uid="uid://bvuii2i1lenug" path="res://Models/Animals/Coyote/Coyote.glb" id="13_tmlhg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5cj7l"]
+sky_top_color = Color(0.384314, 0.454902, 0.713726, 1)
+sky_horizon_color = Color(0.556863, 0.654902, 0.670588, 1)
+ground_bottom_color = Color(0.258159, 0.431479, 0.176322, 1)
+ground_horizon_color = Color(0.243137, 0.427451, 0.337255, 1)
+sun_angle_max = 56.26
+
+[sub_resource type="Sky" id="Sky_sqtp2"]
+sky_material = SubResource("ProceduralSkyMaterial_5cj7l")
+
+[sub_resource type="Environment" id="Environment_u8y0r"]
+background_mode = 2
+sky = SubResource("Sky_sqtp2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l7vjb"]
+size = Vector3(10000, 0, 10000)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_2b3gi")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.55686)
+script = ExtResource("2_bqc7i")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LeftController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
+tracker = &"left_hand"
+script = ExtResource("3_m6sqp")
+jetpack_scene = ExtResource("4_oc6n4")
+bubble_cursor_scene = ExtResource("5_2nd18")
+flashlight_scene = ExtResource("6_s083v")
+is_left = true
+
+[node name="RightController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
+tracker = &"right_hand"
+script = ExtResource("3_m6sqp")
+jetpack_scene = ExtResource("4_oc6n4")
+bubble_cursor_scene = ExtResource("5_2nd18")
+flashlight_scene = ExtResource("6_s083v")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u8y0r")
+
+[node name="groundPlane" type="StaticBody3D" parent="WorldEnvironment"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/groundPlane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
+shape = SubResource("BoxShape3D_l7vjb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.979099, -0.105669, -0.173781, 0.201736, 0.39595, 0.895839, -0.0258536, -0.912172, 0.408991, 0, 0, 0)
+
+[node name="Web" type="Node3D" parent="."]
+script = ExtResource("7_j41m3")
+
+[node name="DeerOrb" parent="Web" instance=ExtResource("8_lwjt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49574, 2.62885, -3.04139)
+skeleton = NodePath("../..")
+
+[node name="Deer" parent="Web/DeerOrb" instance=ExtResource("9_7eqr1")]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, -0.000743538, -0.00125903)
+
+[node name="FoxOrb" parent="Web" instance=ExtResource("8_lwjt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.66615, -6.12395)
+
+[node name="Fox" parent="Web/FoxOrb" instance=ExtResource("10_i4ldd")]
+transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, -0.226481, 0)
+
+[node name="DuckOrb" parent="Web" instance=ExtResource("8_lwjt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19208, 0.994412, -2.68244)
+
+[node name="Duck" parent="Web/DuckOrb" instance=ExtResource("11_aehqm")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.234658, 0)
+
+[node name="SquirrelOrb" parent="Web" instance=ExtResource("8_lwjt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.63352, 2.60286, -4.35972)
+
+[node name="Squirrel" parent="Web/SquirrelOrb" instance=ExtResource("12_6il63")]
+transform = Transform3D(0.006, 0, 0, 0, 0.006, 0, 0, 0, 0.006, 0, 0, 0)
+
+[node name="CoyoteOrb" parent="Web" instance=ExtResource("8_lwjt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.47318, 0.5, -1.38815)
+skeleton = NodePath("../..")
+
+[node name="Coyote" parent="Web/CoyoteOrb" instance=ExtResource("13_tmlhg")]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, -0.287247, -0.00311545)
+
+[connection signal="button_pressed" from="XROrigin3D/LeftController" to="XROrigin3D/LeftController" method="_on_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/LeftController" to="XROrigin3D/LeftController" method="_on_button_released"]
+[connection signal="input_float_changed" from="XROrigin3D/LeftController" to="XROrigin3D/LeftController" method="_on_input_float_changed"]
+[connection signal="input_vector2_changed" from="XROrigin3D/LeftController" to="XROrigin3D/LeftController" method="_on_input_vector_2_changed"]
+[connection signal="button_pressed" from="XROrigin3D/RightController" to="XROrigin3D/RightController" method="_on_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/RightController" to="XROrigin3D/RightController" method="_on_button_released"]
+[connection signal="input_float_changed" from="XROrigin3D/RightController" to="XROrigin3D/RightController" method="_on_input_float_changed"]
+[connection signal="input_vector2_changed" from="XROrigin3D/RightController" to="XROrigin3D/RightController" method="_on_input_vector_2_changed"]
