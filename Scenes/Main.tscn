@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ciphu7ctboar1"]
+[gd_scene load_steps=19 format=3 uid="uid://ciphu7ctboar1"]
 
 [ext_resource type="Script" path="res://Scripts/XRSetup.gd" id="1_ijei3"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="2_ktjwo"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://462lw4m3ef15" path="res://SceneInstances/BubbleCursor.tscn" id="5_jlwah"]
 [ext_resource type="Script" path="res://Scripts/Orbs/OrbConnection.gd" id="5_vwttx"]
 [ext_resource type="PackedScene" uid="uid://bjcmeh163cu7o" path="res://SceneInstances/Orb.tscn" id="6_dpdlu"]
+[ext_resource type="AudioStream" uid="uid://cajhx715cl1a7" path="res://Materials/Block_Break.wav" id="7_54h0c"]
 [ext_resource type="PackedScene" uid="uid://d2ny4h0w312eh" path="res://Models/Animals/Deer/Deer.glb" id="7_fdxov"]
 [ext_resource type="PackedScene" uid="uid://bembmau1gxhyb" path="res://Models/Animals/Fox/Fox.glb" id="8_0kmie"]
 [ext_resource type="PackedScene" uid="uid://b3pr0ff3ly0b3" path="res://Models/Animals/Duck/Duck.glb" id="9_6i68h"]
@@ -49,12 +50,18 @@ bubble_cursor_scene = ExtResource("5_jlwah")
 flashlight_scene = ExtResource("4_7fdne")
 is_left = true
 
+[node name="Debugger" type="AudioStreamPlayer" parent="XROrigin3D/LeftController"]
+stream = ExtResource("7_54h0c")
+
 [node name="RightController" type="XRController3D" parent="XROrigin3D" groups=["controllers"]]
 tracker = &"right_hand"
 script = ExtResource("3_1aqbc")
 jetpack_scene = ExtResource("4_xcc3m")
 bubble_cursor_scene = ExtResource("5_jlwah")
 flashlight_scene = ExtResource("4_7fdne")
+
+[node name="Debugger" type="AudioStreamPlayer" parent="XROrigin3D/RightController"]
+stream = ExtResource("7_54h0c")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u8y0r")
