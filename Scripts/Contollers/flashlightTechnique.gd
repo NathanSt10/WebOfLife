@@ -6,6 +6,7 @@ var right_controller_model = preload("res://Models/Quest2Controllers/OculusQuest
 var highlighted_collider: MeshInstance3D
 var selected: MeshInstance3D
 @onready var controllers = get_tree().get_nodes_in_group("controllers")
+signal object_grabbed(grabbed_object)
 
 # Currently not used
 var offset = 0
@@ -39,18 +40,29 @@ func initialize():
 
 
 func _process(delta: float) -> void:
-	if $"ShapeCast3D".is_colliding(): # Known bug to crash when swithcing between flashlight and bubble
-		if $"ShapeCast3D".get_collider(0): # <- helps protect against crashes I think but not perfect
-			highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
-			print("colliding with %s" % $"ShapeCast3D".get_collider(0).get_parent().name)
-			highlighted_collider.scale = Vector3(1.1, 1.1, 1.1)
+	if $"ShapeCast3D".is_colliding():
+		var collider = $"ShapeCast3D".get_collider(0)
+		if collider:
+			highlighted_collider = collider.get_parent()
+			print("Colliding with %s" % highlighted_collider.name)
+
+			# Apply a constant scaling factor (relative to the original scale)
+			if not highlighted_collider.has_meta("original_scale"):
+				highlighted_collider.set_meta("original_scale", highlighted_collider.scale)
+			
+			var original_scale = highlighted_collider.get_meta("original_scale")
+			highlighted_collider.scale = original_scale * Vector3(1.1, 1.1, 1.1)
 	elif highlighted_collider and !selected:
-		print("There was a collider but now there isnt")
-		highlighted_collider.scale = Vector3(1, 1, 1)
+		print("There was a collider but now there isn't")
+		if highlighted_collider.has_meta("original_scale"):
+			highlighted_collider.scale = highlighted_collider.get_meta("original_scale")
+		else:
+			highlighted_collider.scale = highlighted_collider.get_meta("original_scale")  # Fallback to default
 		highlighted_collider = null
 		
 	if selected:
 		update_selection_position()
+
 
 # Enable shapecast and make controllers visible
 func enable_selection():
@@ -65,7 +77,8 @@ func enable_selection():
 		controllers[1].get_child(0).find_child("ShapeCast3D").enabled = true
 		controllers[1].get_child(0).visible = true
 	
-	selected.scale = Vector3(1, 1, 1)
+	if selected and selected.has_meta("current_scale"):
+		selected.scale = selected.get_meta("current_scale")
 	selected.global_position = selected.get_meta("original_position")
 
 # Disable shapcecast and make controllers invisible
@@ -80,8 +93,8 @@ func disable_selection():
 		controllers[1].get_child(0).find_child("ShapeCast3D").enabled = false
 		controllers[1].get_child(0).visible = false
 	
-	print("setting scale to .5")
-	selected.scale = Vector3(0.5, 0.5, 0.5)
+	if selected:
+		selected.set_meta("current_scale", selected.scale)
 
 
 func update_selection_position():
@@ -93,12 +106,14 @@ func _on_button_pressed(name: String) -> void:
 	if name == "grip_click" and highlighted_collider:
 		print("grip clicked")
 		selected = highlighted_collider
+		emit_signal("object_grabbed", selected)
 		selected.set_meta("original_position", highlighted_collider.global_position)
 		disable_selection()
 
 
 func _on_button_released(name: String) -> void:
 	if name == "grip_click" and selected:
+		emit_signal("object_grabbed", null)
 		print("Grip released")
 		enable_selection()
 		selected = null
@@ -116,7 +131,8 @@ func _on_input_vector_2_changed(name: String, value: Vector2) -> void:
 func _on_left_controller_switched(controller_type: String, is_left: bool):
 	print("Left Flashlight switched to Bubble")
 	if selected:
-		selected.scale = Vector3(1, 1, 1)
+		if selected.has_meta("current_scale"):
+			selected.scale = selected.get_meta("current_scale")
 		enable_selection()
 		selected = null
 	if highlighted_collider:
@@ -125,8 +141,12 @@ func _on_left_controller_switched(controller_type: String, is_left: bool):
 func _on_right_controller_switched(controller_type: String, is_left: bool):
 	print("Right Flashlight switched to Bubble")
 	if selected:
-		selected.scale = Vector3(1, 1, 1)
+		if selected.has_meta("current_scale"):
+			selected.scale = selected.get_meta("current_scale")
 		enable_selection()
 		selected = null
 	if highlighted_collider:
 		highlighted_collider.scale = Vector3(1, 1, 1)
+
+func set_grabbed_object(grabbed_object):
+	selected = grabbed_object
