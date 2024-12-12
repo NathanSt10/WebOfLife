@@ -1,11 +1,14 @@
 extends Node3D
 
 @onready var display_mesh: MeshInstance3D = $DisplayMesh
+@onready var v_box_container: VBoxContainer = $SubViewport/Control/Panel/VBoxContainer
 @onready var orb_1_label: Label = $SubViewport/Control/Panel/VBoxContainer/HBoxContainer/Orb1Label
 @onready var orb_2_label: Label = $SubViewport/Control/Panel/VBoxContainer/HBoxContainer/Orb2Label
+@onready var instruction_label: Label = $SubViewport/Control/Panel/InstructionLabel
 @onready var web_handler: Node3D = $"../../WebHandler"
 @onready var button_1: MeshInstance3D = $Button1 
 @onready var button_2: MeshInstance3D = $Button2
+@onready var button_3: MeshInstance3D = $Button3
 
 var textHolder = ""
 
@@ -16,6 +19,7 @@ signal resetSimulation
 func _ready() -> void:
 	button_1.buttonInput.connect(handleButton)
 	button_2.buttonInput.connect(handleButton)
+	button_3.buttonInput.connect(handleButton)
 	
 
 
@@ -46,4 +50,7 @@ func handleButton(button : Node3D):
 	elif(button == button_2): #reset
 		print("Button 2")
 		resetSimulation.emit()
+	elif(button == button_3):
+		instruction_label.visible = !instruction_label.visible
+		
 	

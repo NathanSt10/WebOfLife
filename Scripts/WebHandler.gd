@@ -60,5 +60,5 @@ func onTogglePlay():
 func onResetSimulation():
 	for animal in webDict:
 		if(webDict[animal] != null):
-			webDict[animal].currentPopulation = webDict[animal].initialPopulation
+			webDict[animal].population = webDict[animal].initialPopulation
 			
