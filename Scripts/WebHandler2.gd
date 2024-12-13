@@ -1,11 +1,11 @@
 extends Node3D
 
 var line_renderer = preload("res://Scripts/Orbs/LineRenderer.gd")
-@onready var coyote = $"CoyoteOrb"
-@onready var fox = $"FoxOrb"
-@onready var deer: MeshInstance3D = $DeerOrb
-@onready var duck: MeshInstance3D = $DuckOrb
-@onready var squirrel: MeshInstance3D = $SquirrelOrb
+@onready var coyote = $"../Shelf/CoyoteOrb"
+@onready var fox = $"../Shelf/FoxOrb"
+@onready var deer: MeshInstance3D = $"../Shelf/DeerOrb"
+@onready var duck: MeshInstance3D = $"../Shelf/DuckOrb"
+@onready var squirrel: MeshInstance3D = $"../Shelf/SquirrelOrb"
 @onready var gui: Node3D = $"../WorldEnvironment/Gui"
 
 var webDict = {"coyote" : null, "fox" : null, "deer" : null, "duck" : null, "squirrel" : null}
@@ -109,6 +109,11 @@ func updateWeb():
 						webDict[animal].population += ceil(webDict[animal].population / 2)
 
 func orbInPosition(animalName : String, orb : Node3D):
+	print("Orb in Position")
+	if orb.get_parent_node_3d() != self:
+		print("Reparenting %s to %s. Its previous parent was %s" % [orb, self, orb.get_parent_node_3d()])
+		orb.get_parent_node_3d().remove_child(orb)
+		self.add_child(orb)
 	webDict[animalName] = orb
 	#Add connection logic here. Toggle visibility of all connections from this node and to this node.
 	#May be difficult, but I think it's possible. Refer to how connections are updated using metadata
