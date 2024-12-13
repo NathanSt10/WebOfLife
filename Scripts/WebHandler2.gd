@@ -114,6 +114,7 @@ func orbInPosition(animalName : String, orb : Node3D):
 		print("Reparenting %s to %s. Its previous parent was %s" % [orb, self, orb.get_parent_node_3d()])
 		orb.get_parent_node_3d().remove_child(orb)
 		self.add_child(orb)
+	create_orb_thread(orb)
 	webDict[animalName] = orb
 	#Add connection logic here. Toggle visibility of all connections from this node and to this node.
 	#May be difficult, but I think it's possible. Refer to how connections are updated using metadata
