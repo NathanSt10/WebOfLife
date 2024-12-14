@@ -20,6 +20,8 @@ refraction_scale = 0.01
 [sub_resource type="SphereShape3D" id="SphereShape3D_sh3ve"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_h3joe"]
+radius = 0.525
+height = 1.05
 
 [node name="Orb" type="MeshInstance3D"]
 mesh = SubResource("SphereMesh_kaxu4")
@@ -33,5 +35,6 @@ collision_layer = 3
 shape = SubResource("SphereShape3D_sh3ve")
 
 [node name="Highlight" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_h3joe")
 surface_material_override/0 = ExtResource("2_bu7xb")

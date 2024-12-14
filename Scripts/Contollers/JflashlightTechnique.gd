@@ -9,6 +9,10 @@ var selected: MeshInstance3D
 
 @onready var area_3d: Area3D = $Area3D
 
+signal grabbed(orb)
+signal released(orb)
+signal highlight(orb, isHighlighted)
+
 # Currently not used
 var offset = 0
 var resetJoystick: bool = true
@@ -43,12 +47,15 @@ func initialize():
 func _process(delta: float) -> void:
 	if $"ShapeCast3D".is_colliding(): # Known bug to crash when swithcing between flashlight and bubble
 		if $"ShapeCast3D".get_collider(0): # <- helps protect against crashes I think but not perfect
+			
 			highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
-			print("colliding with %s" % $"ShapeCast3D".get_collider(0).get_parent().name)
-			highlighted_collider.scale = Vector3(1.1, 1.1, 1.1)
+			highlight.emit(highlighted_collider, true)
+			#print("colliding with %s" % $"ShapeCast3D".get_collider(0).get_parent().name)
+			#highlighted_collider.scale = Vector3(1.1, 1.1, 1.1)
 	elif highlighted_collider and !selected:
 		print("There was a collider but now there isnt")
-		highlighted_collider.scale = Vector3(1, 1, 1)
+		highlight.emit(highlighted_collider, false)
+		#highlighted_collider.scale = Vector3(1, 1, 1)
 		highlighted_collider = null
 		
 	if selected:
@@ -98,6 +105,7 @@ func update_selection_position():
 func _on_button_pressed(name: String) -> void:
 	if name == "grip_click" and highlighted_collider:
 		print("grip clicked")
+		grabbed.emit(highlighted_collider)
 		selected = highlighted_collider
 		selected.set_meta("original_position", highlighted_collider.global_position)
 		disable_selection()
@@ -106,6 +114,7 @@ func _on_button_pressed(name: String) -> void:
 func _on_button_released(name: String) -> void:
 	if name == "grip_click" and selected:
 		print("Grip released")
+		released.emit(selected)
 		enable_selection()
 		selected = null
 

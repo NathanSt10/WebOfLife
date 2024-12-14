@@ -8,34 +8,67 @@ var initialPopulation = 200
 var population
 var lastScale = 1.0 #To prevent constant updating. Could be handled with controllers I think
 
+@onready var controllers = get_tree().get_nodes_in_group("controllers")
+
 signal inPosition
 signal orbMoved
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	population = initialPopulation
 	lastPos = global_position
+	for controller in controllers:
+		controller.get_child(0).grabbed.connect(_on_grabbed)
+		controller.get_child(0).released.connect(_on_released)
+		controller.get_child(0).highlight.connect(highlight)
+	
 
+
+func _on_grabbed(orb):
+	if orb == self:
+		print("Orb grabbed!")
+		#show_highlight()
+
+
+func _on_released(orb):
+	if orb == self:
+		print("Orb released!")
+		#hide_highlight()
+
+func show_highlight():
+	print("Highlighting the orb: %s" % animalName)
+	$Highlight.visible = true
+
+
+func hide_highlight():
+	print("Unhighlighting the orb: %s" % animalName)
+	$Highlight.visible = false
+
+
+func highlight(orb, isHighlighted):
+	if orb == self:
+		$Highlight.visible = isHighlighted
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#It's not exactly reaching the goalLoc. Just fix this in the handler.
 	#Once position stops updating, send a signal that says it's done moving
 	if(moved):
-		print("Moved is true, globalPos: %s" % global_position)
+		#print("Moved is true, globalPos: %s" % global_position)
 		global_position = global_position.slerp(goalLoc, 2*delta)
 		if(global_position.distance_to(goalLoc) < 0.001): #Update this by adding an area3d that emits the signal when entered.
 			moved = false
 			global_position = goalLoc
 			lastPos = goalLoc
-			inPosition.emit(animalName, self)
-			print("Animal Name: %s, Self: %s" % [animalName, self])
 			print("Emit inPosition")
+			print("Animal Name: %s, Self: %s" % [animalName, self])
+			inPosition.emit(animalName, self)
 	else:
-		print("Moved is false, lastPos: %s, globalPos: %s" % [lastPos, global_position])
+		#print("Moved is false, lastPos: %s, globalPos: %s" % [lastPos, global_position])
 		moved = !(lastPos == global_position)
 		if(moved):
-			orbMoved.emit(animalName, self)
 			print("Emit orbMoved")
+			orbMoved.emit(animalName, self)
 		lastPos = global_position
 		
 	#Scale handling
@@ -54,6 +87,3 @@ func _process(delta: float) -> void:
 		elif(scale.x > 0.0 and scale.x <= 0.5):
 			initialPopulation = 50
 	lastScale = scale.x
-	
-	
-	

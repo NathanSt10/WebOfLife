@@ -111,7 +111,7 @@ func updateWeb():
 func orbInPosition(animalName : String, orb : Node3D):
 	print("Orb in Position")
 	if orb.get_parent_node_3d() != self:
-		print("Reparenting %s to %s. Its previous parent was %s" % [orb, self, orb.get_parent_node_3d()])
+		print("Reparenting %s to %s. Its previous parent was %s" % [orb.name, self.name, orb.get_parent_node_3d().name])
 		orb.get_parent_node_3d().remove_child(orb)
 		self.add_child(orb)
 	create_orb_thread(orb)
@@ -175,7 +175,7 @@ func update_threads():
 			
 			# Raycast of prey pointing to predator
 			var animal_raycast_to_predator = thread.get_meta("preys_raycast")
-			
+			print("Animal: %s\nConnection: %s" % [animal, thread_connection])
 			# Setting destination of raycasts
 			predator_raycast_to_animal.target_position = animal.global_position - thread_connection.global_position
 			animal_raycast_to_predator.target_position = thread_connection.global_position - animal.global_position
