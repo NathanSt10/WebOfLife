@@ -13,10 +13,6 @@ signal grabbed(orb)
 signal released(orb)
 signal highlight(orb, isHighlighted)
 
-# Currently not used
-var offset = 0
-var resetJoystick: bool = true
-
 func _ready() -> void:
 	print("Flashlight Technique Ready")
 	if controllers[1].is_left:
@@ -28,8 +24,6 @@ func _ready() -> void:
 
 # Sets quest 2 models to the correct hand
 func initialize():
-	offset = 0
-	resetJoystick = true
 	if get_parent().is_left: 
 		var left_controller_model_scene = left_controller_model.instantiate()
 		left_controller_model_scene.global_rotation = Vector3(0,deg_to_rad(180),0)
@@ -46,16 +40,11 @@ func initialize():
 
 func _process(delta: float) -> void:
 	if $"ShapeCast3D".is_colliding(): # Known bug to crash when swithcing between flashlight and bubble
-		if $"ShapeCast3D".get_collider(0): # <- helps protect against crashes I think but not perfect
-			
-			highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
-			highlight.emit(highlighted_collider, true)
-			#print("colliding with %s" % $"ShapeCast3D".get_collider(0).get_parent().name)
-			#highlighted_collider.scale = Vector3(1.1, 1.1, 1.1)
+		highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
+		highlight.emit(highlighted_collider, true)
 	elif highlighted_collider and !selected:
 		print("There was a collider but now there isnt")
 		highlight.emit(highlighted_collider, false)
-		#highlighted_collider.scale = Vector3(1, 1, 1)
 		highlighted_collider = null
 		
 	if selected:
@@ -118,15 +107,6 @@ func _on_button_released(name: String) -> void:
 		enable_selection()
 		selected = null
 
-func _on_input_vector_2_changed(name: String, value: Vector2) -> void:
-	if value.y > 0.8 and resetJoystick:
-		offset += 1
-		resetJoystick = false
-	if value.y < -0.8 and resetJoystick:
-		offset -= 1
-		resetJoystick = false
-	if value.y > -0.1 and value.y < 0.1:
-		resetJoystick = true
 
 func _on_left_controller_switched(controller_type: String, is_left: bool):
 	print("Left Flashlight switched to Bubble")

@@ -2,6 +2,7 @@ class_name Orb extends Node3D
 
 @export var animalName = "default"
 @export var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
+var preyList= []
 var moved = false #Change this to true when the orb is moved or placed. Change to false after locking in
 var lastPos = Vector3(0.0,0.0,0.0)
 var initialPopulation = 200
@@ -21,28 +22,16 @@ func _ready() -> void:
 		controller.get_child(0).grabbed.connect(_on_grabbed)
 		controller.get_child(0).released.connect(_on_released)
 		controller.get_child(0).highlight.connect(highlight)
-	
 
 
 func _on_grabbed(orb):
 	if orb == self:
 		print("Orb grabbed!")
-		#show_highlight()
 
 
 func _on_released(orb):
 	if orb == self:
 		print("Orb released!")
-		#hide_highlight()
-
-func show_highlight():
-	print("Highlighting the orb: %s" % animalName)
-	$Highlight.visible = true
-
-
-func hide_highlight():
-	print("Unhighlighting the orb: %s" % animalName)
-	$Highlight.visible = false
 
 
 func highlight(orb, isHighlighted):
