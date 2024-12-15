@@ -4,10 +4,11 @@ class_name Orb extends Node3D
 @export var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
 var preyList= []
 var moved = false #Change this to true when the orb is moved or placed. Change to false after locking in
-var lastPos = Vector3(0.0,0.0,0.0)
+var lastPos = Vector3(0.0,0.0,0.0) # set in ready
 var initialPopulation = 200
 var population
 var lastScale = 1.0 #To prevent constant updating. Could be handled with controllers I think
+var grabbed # Used to stop orb from trying to shift back in place while being grabbed
 
 @onready var controllers = get_tree().get_nodes_in_group("controllers")
 
@@ -27,11 +28,13 @@ func _ready() -> void:
 func _on_grabbed(orb):
 	if orb == self:
 		print("Orb grabbed!")
+		grabbed = true
 
 
 func _on_released(orb):
 	if orb == self:
 		print("Orb released!")
+		grabbed = false
 
 
 func highlight(orb, isHighlighted):
@@ -42,7 +45,7 @@ func highlight(orb, isHighlighted):
 func _process(delta: float) -> void:
 	#It's not exactly reaching the goalLoc. Just fix this in the handler.
 	#Once position stops updating, send a signal that says it's done moving
-	if(moved):
+	if(moved and grabbed):
 		#print("Moved is true, globalPos: %s" % global_position)
 		global_position = global_position.slerp(goalLoc, 2*delta)
 		if(global_position.distance_to(goalLoc) < 0.001): #Update this by adding an area3d that emits the signal when entered.
@@ -52,7 +55,7 @@ func _process(delta: float) -> void:
 			print("Emit inPosition")
 			print("Animal Name: %s, Self: %s" % [animalName, self])
 			inPosition.emit(animalName, self)
-	else:
+	elif not grabbed:
 		#print("Moved is false, lastPos: %s, globalPos: %s" % [lastPos, global_position])
 		moved = !(lastPos == global_position)
 		if(moved):

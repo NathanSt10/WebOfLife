@@ -36,14 +36,14 @@ func initialize():
 		add_child(right_controller_model_scene)
 	print("Flashlight reinitialized")
 
-
-
+var prev
 func _process(delta: float) -> void:
 	if $"ShapeCast3D".is_colliding(): # Known bug to crash when swithcing between flashlight and bubble
 		highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
+		if prev != highlighted_collider: highlight.emit(prev, false)
 		highlight.emit(highlighted_collider, true)
-	elif highlighted_collider and !selected:
-		print("There was a collider but now there isnt")
+		prev = highlighted_collider
+	elif highlighted_collider != null and selected == null:
 		highlight.emit(highlighted_collider, false)
 		highlighted_collider = null
 		
@@ -66,11 +66,12 @@ func enable_selection():
 		area_3d.monitorable = true
 	
 	selected.scale = Vector3(1, 1, 1)
-	selected.global_position = selected.get_meta("original_position")
+	selected.global_position = selected.lastPos
 
 # Disable shapcecast and make controllers invisible
 func disable_selection():
 	print("disable selection")
+	highlight.emit(selected, false)
 	if controllers[0].get_child(0).name == "Flashlight":
 		print("%s controller is flashlight" % controllers[0])
 		controllers[0].get_child(0).find_child("ShapeCast3D").enabled = false
@@ -96,7 +97,7 @@ func _on_button_pressed(name: String) -> void:
 		print("grip clicked")
 		grabbed.emit(highlighted_collider)
 		selected = highlighted_collider
-		selected.set_meta("original_position", highlighted_collider.global_position)
+		selected.lastPos = highlighted_collider.global_position
 		disable_selection()
 
 
@@ -105,6 +106,11 @@ func _on_button_released(name: String) -> void:
 		print("Grip released")
 		released.emit(selected)
 		enable_selection()
+		
+		# Very rudimentary way to 'add' orb to web, currently no confirmation, just grab and release
+		selected.moved = true 
+		selected.grabbed = true
+		
 		selected = null
 
 
