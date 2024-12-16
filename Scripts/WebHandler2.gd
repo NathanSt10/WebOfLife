@@ -37,13 +37,14 @@ func _process(delta: float) -> void:
 
 #Simulation Notes
 #Predators: A predator will attempt a hunt. If it fails, it will starve.
-#Coyotes: Predator. Grow as long as population is fed. Decrement population by hungryAnimals
-#40% of population eats deer, 30% eat duck, 30% eat squirrel
-#Foxes: Predator. Grow as long as population is fed. Decrement population by hungryAnimals. Less food needed
-#25% eat deer, 45% eat duck, 30% eat duck
-#Deer: Prey. Grow as long as population is greater than 1. 1 deer can feed 2 coyotes or 4 foxes
-#Duck: Prey. Grow as long as population is greater than 1. 1 duck feeds 1 coyote or 1 fox
-#Squirrel: Prey. Grow as long as population is greater than 1. 1 squirrel feeds 1 coyote and 1 fox
+#Coyotes: Predator. Grow by population * 3 when population > 1
+#60% hunt deer, and a single deer feeds 2. 15% hunt squirrels. 10% hunt ducks. 15% scavenge
+#Foxes: Predator. Grow population by population * 5/2 when population > 1
+#50% hunt squirrels, 25% hunt ducks, 25% scavenge
+#Possibly include coyote related deaths
+#Deer: Prey. Grow population by population / 2
+#Duck: Prey. Grow population by population * 10/2, or population * 5
+#Squirrel: Prey. Grow population by population * 3/2
 func updateWeb():
 	for animal in webDict:
 		if(webDict[animal] != null):
@@ -51,62 +52,59 @@ func updateWeb():
 				"coyote":
 					var hungryAnimals = webDict[animal].population
 					if(webDict["deer"] != null and webDict["deer"].population > 0):
-						var toEat = floor((webDict[animal].population * 0.4) / 2)
+						var toEat = floor((webDict[animal].population * 0.6) / 2)
 						webDict["deer"].population -= toEat
 						hungryAnimals -= toEat
 						if(webDict["deer"].population < 0):
-							hungryAnimals += webDict["deer"].population
+							hungryAnimals += webDict["deer"].population * 2
 							webDict["deer"].population = 0
 					if(webDict["duck"] != null and webDict["duck"].population > 0):
-						var toEat = floor((webDict[animal].population * 0.3))
+						var toEat = floor(webDict[animal].population * 0.1)
 						webDict["duck"].population -= toEat 
 						hungryAnimals -= toEat
 						if(webDict["duck"].population < 0):
 							hungryAnimals += webDict["duck"].population
 							webDict["duck"].population = 0
 					if(webDict["squirrel"] != null and webDict["squirrel"].population > 0):
-						var toEat = floor((webDict[animal].population * 0.3))
+						var toEat = floor(webDict[animal].population * 0.15)
 						webDict["squirrel"].population -= toEat
 						hungryAnimals -= toEat
 						if(webDict["squirrel"].population < 0):
 							hungryAnimals += webDict["squirrel"].population
 							webDict["squirrel"].population = 0
+					var toEat = floor(webDict[animal].population * 0.15)
+					hungryAnimals -= toEat
 					webDict[animal].population -= hungryAnimals
-					webDict[animal].population += ceil(webDict[animal].population / 2)
+					webDict[animal].population += ceil(webDict[animal].population * 3)
 				"fox":
 					var hungryAnimals = webDict[animal].population
-					if(webDict["deer"] != null and webDict["deer"].population > 0):
-						var toEat = floor((webDict[animal].population * 0.25) / 4)
-						webDict["deer"].population -= toEat
-						hungryAnimals -= toEat
-						if(webDict["deer"].population < 0):
-							hungryAnimals += webDict["deer"].population
-							webDict["deer"].population = 0
 					if(webDict["duck"] != null and webDict["duck"].population > 0):
-						var toEat = floor((webDict[animal].population * 0.45))
+						var toEat = floor(webDict[animal].population * 0.25)
 						webDict["duck"].population -= toEat 
 						hungryAnimals -= toEat
 						if(webDict["duck"].population < 0):
 							hungryAnimals += webDict["duck"].population
 							webDict["duck"].population = 0
 					if(webDict["squirrel"] != null and webDict["squirrel"].population > 0):
-						var toEat = floor((webDict[animal].population * 0.3))
+						var toEat = floor(webDict[animal].population * 0.5)
 						webDict["squirrel"].population -= toEat
 						hungryAnimals -= toEat
 						if(webDict["squirrel"].population < 0):
 							hungryAnimals += webDict["squirrel"].population
 							webDict["squirrel"].population = 0
+					var toEat = floor(webDict[animal].population * 0.25)
+					hungryAnimals -= toEat
 					webDict[animal].population -= hungryAnimals
-					webDict[animal].population += ceil(webDict[animal].population / 2)
+					webDict[animal].population += ceil(webDict[animal].population * (5/2))
 				"deer":
 					if(webDict[animal].population > 1):
 						webDict[animal].population += ceil(webDict[animal].population / 2)
 				"duck":
 					if(webDict[animal].population > 1):
-						webDict[animal].population += ceil(webDict[animal].population / 2)
+						webDict[animal].population += ceil(webDict[animal].population * 5)
 				"squirrel":
 					if(webDict[animal].population > 1):
-						webDict[animal].population += ceil(webDict[animal].population / 2)
+						webDict[animal].population += ceil(webDict[animal].population * (3/2))
 
 func orbInPosition(animalName : String, orb : Node3D):
 	webDict[animalName] = orb
