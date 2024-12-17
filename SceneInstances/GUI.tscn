@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://bn6laar0b1t3p"]
+[gd_scene load_steps=22 format=3 uid="uid://bn6laar0b1t3p"]
 
 [ext_resource type="Script" path="res://Scripts/GUI2.gd" id="1_8c0rb"]
 [ext_resource type="Script" path="res://Scripts/GUIButton.gd" id="2_6l245"]
+[ext_resource type="Theme" uid="uid://vpo8173f3djh" path="res://GUITheme.tres" id="2_mdghe"]
 [ext_resource type="BoxMesh" uid="uid://cksfchaox0peo" path="res://Materials/ButtonHighlightMesh.tres" id="3_hdne4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0xyp"]
@@ -25,25 +26,6 @@ albedo_texture = SubResource("ViewportTexture_2c0ap")
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_urpr7")
 size = Vector2(3, 2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61q68"]
-bg_color = Color(0.00638623, 0.256551, 0.42385, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glbwi"]
-bg_color = Color(1.54018e-06, 0.703717, 0.993119, 1)
-
-[sub_resource type="Theme" id="Theme_fwy1e"]
-Label/colors/font_color = Color(1, 1, 1, 1)
-Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/colors/font_shadow_color = Color(0, 0, 0, 1)
-Label/constants/line_spacing = 0
-Label/constants/outline_size = 0
-Label/constants/shadow_offset_x = 0
-Label/constants/shadow_offset_y = 0
-Label/constants/shadow_outline_size = 0
-Label/font_sizes/font_size = 16
-Label/styles/normal = SubResource("StyleBoxFlat_61q68")
-Panel/styles/panel = SubResource("StyleBoxFlat_glbwi")
 
 [sub_resource type="LabelSettings" id="LabelSettings_cibjf"]
 font_size = 12
@@ -115,7 +97,7 @@ custom_minimum_size = Vector2(560, 320)
 layout_mode = 0
 offset_right = 560.0
 offset_bottom = 320.0
-theme = SubResource("Theme_fwy1e")
+theme = ExtResource("2_mdghe")
 
 [node name="InstructionLabel" type="Label" parent="GUIGrabBar/SubViewport/Control/Panel"]
 top_level = true

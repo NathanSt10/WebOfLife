@@ -1,7 +1,11 @@
 class_name Orb extends Node3D
 
+@onready var orb_animal_popup: Node3D = $OrbAnimalPopup
+
 @export var animalName = "default"
 @export var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
+@export var popupScript : Script
+
 var moved = true #Change this to true when the orb is moved or placed. Change to false after locking in
 var lastPos = Vector3(0.0,0.0,0.0)
 var initialPopulation = 10000
@@ -13,7 +17,7 @@ signal orbMoved
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	population = initialPopulation
-
+	orb_animal_popup.set_script(popupScript)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -48,6 +52,10 @@ func _process(delta: float) -> void:
 		elif(scale.x > 0.0 and scale.x <= 0.5):
 			initialPopulation = 5000
 	lastScale = scale.x
-	
-	
-	
+
+#Could be refined with a stack implementation to prevent multiple collisions, but this is fine for now
+func _on_area_entered(area: Area3D) -> void:
+	orb_animal_popup.visible = true
+
+func _on_area_exited(area: Area3D) -> void:
+	orb_animal_popup.visible = false

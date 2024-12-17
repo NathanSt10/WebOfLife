@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bbosiw7pc21r3"]
+[gd_scene load_steps=24 format=3 uid="uid://bbosiw7pc21r3"]
 
 [ext_resource type="Script" path="res://Scripts/XRSetup.gd" id="1_2b3gi"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="2_bqc7i"]
@@ -9,11 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://bn6laar0b1t3p" path="res://SceneInstances/GUI.tscn" id="7_0x617"]
 [ext_resource type="Script" path="res://Scripts/WebHandler2.gd" id="7_acbos"]
 [ext_resource type="PackedScene" uid="uid://d2ny4h0w312eh" path="res://Models/Animals/Deer/Deer.glb" id="9_7eqr1"]
+[ext_resource type="Script" path="res://Scripts/Orbs/OrbPopupScripts/DeerPopup.gd" id="10_gcdeq"]
 [ext_resource type="PackedScene" uid="uid://bembmau1gxhyb" path="res://Models/Animals/Fox/Fox.glb" id="10_i4ldd"]
 [ext_resource type="PackedScene" uid="uid://b3pr0ff3ly0b3" path="res://Models/Animals/Duck/Duck.glb" id="11_aehqm"]
 [ext_resource type="PackedScene" uid="uid://c4j4xocvlth1f" path="res://Models/Animals/Squirrel/Squirrel.glb" id="12_6il63"]
+[ext_resource type="Script" path="res://Scripts/Orbs/OrbPopupScripts/FoxPopup.gd" id="12_8klt4"]
 [ext_resource type="PackedScene" uid="uid://bvuii2i1lenug" path="res://Models/Animals/Coyote/Coyote.glb" id="13_tmlhg"]
 [ext_resource type="PackedScene" uid="uid://caxcapgoijnvn" path="res://SceneInstances/JTestOrb.tscn" id="13_um5f1"]
+[ext_resource type="Script" path="res://Scripts/Orbs/OrbPopupScripts/DuckPopup.gd" id="14_hmgdw"]
+[ext_resource type="Script" path="res://Scripts/Orbs/OrbPopupScripts/SquirrelPopup.gd" id="16_h6m55"]
+[ext_resource type="Script" path="res://Scripts/Orbs/OrbPopupScripts/CoyotePopup.gd" id="18_yncxq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5cj7l"]
 sky_top_color = Color(0.384314, 0.454902, 0.713726, 1)
@@ -80,6 +85,7 @@ script = ExtResource("7_acbos")
 [node name="DeerOrb" parent="Web" instance=ExtResource("13_um5f1")]
 animalName = "deer"
 goalLoc = Vector3(1.5, 2.7, -3)
+popupScript = ExtResource("10_gcdeq")
 
 [node name="Deer" parent="Web/DeerOrb" instance=ExtResource("9_7eqr1")]
 transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
@@ -88,6 +94,7 @@ transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
 skeleton = NodePath("../..")
 animalName = "fox"
 goalLoc = Vector3(0, 1.6, -6)
+popupScript = ExtResource("12_8klt4")
 
 [node name="Fox" parent="Web/FoxOrb" instance=ExtResource("10_i4ldd")]
 transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, -0.2, 0)
@@ -95,6 +102,7 @@ transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, -0.2, 0)
 [node name="DuckOrb" parent="Web" instance=ExtResource("13_um5f1")]
 animalName = "duck"
 goalLoc = Vector3(4, 1, -2.6)
+popupScript = ExtResource("14_hmgdw")
 
 [node name="Duck" parent="Web/DuckOrb" instance=ExtResource("11_aehqm")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.2, 0)
@@ -102,6 +110,7 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.2, 0)
 [node name="SquirrelOrb" parent="Web" instance=ExtResource("13_um5f1")]
 animalName = "squirrel"
 goalLoc = Vector3(-4.6, 2.6, -4.3)
+popupScript = ExtResource("16_h6m55")
 
 [node name="Squirrel" parent="Web/SquirrelOrb" instance=ExtResource("12_6il63")]
 transform = Transform3D(0.006, 0, 0, 0, 0.006, 0, 0, 0, 0.006, 0, 0, 0)
@@ -109,6 +118,7 @@ transform = Transform3D(0.006, 0, 0, 0, 0.006, 0, 0, 0, 0.006, 0, 0, 0)
 [node name="CoyoteOrb" parent="Web" instance=ExtResource("13_um5f1")]
 animalName = "coyote"
 goalLoc = Vector3(-2.5, 0.5, -1.4)
+popupScript = ExtResource("18_yncxq")
 
 [node name="Coyote" parent="Web/CoyoteOrb" instance=ExtResource("13_tmlhg")]
 transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, -0.287, 0)

@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://caxcapgoijnvn"]
+[gd_scene load_steps=7 format=3 uid="uid://caxcapgoijnvn"]
 
 [ext_resource type="Script" path="res://Scripts/Orbs/JTestOrb.gd" id="1_h81hj"]
+[ext_resource type="PackedScene" uid="uid://juih52ojo8pc" path="res://SceneInstances/OrbAnimalPopup.tscn" id="2_4hdgg"]
+[ext_resource type="Script" path="res://Scripts/Orbs/OrbPopupScripts/OrbPopup.gd" id="2_y7hbo"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_kaxu4"]
 
@@ -22,9 +24,16 @@ refraction_scale = 0.01
 mesh = SubResource("SphereMesh_kaxu4")
 surface_material_override/0 = SubResource("StandardMaterial3D_fng0h")
 script = ExtResource("1_h81hj")
+popupScript = ExtResource("2_y7hbo")
 
 [node name="Area3D" type="Area3D" parent="."]
-collision_layer = 3
+collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_sh3ve")
+
+[node name="OrbAnimalPopup" parent="." instance=ExtResource("2_4hdgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_exited"]
