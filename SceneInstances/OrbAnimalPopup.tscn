@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://juih52ojo8pc"]
+
+[ext_resource type="Theme" uid="uid://vpo8173f3djh" path="res://GUITheme.tres" id="1_c2lu5"]
+[ext_resource type="Script" path="res://Scripts/Orbs/OrbPopupScripts/OrbPopup.gd" id="1_h1w8i"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lig3v"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1nw7i"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_lig3v")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_xitnd"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1nw7i")
+
+[sub_resource type="LabelSettings" id="LabelSettings_5cmkj"]
+font_size = 24
+
+[node name="OrbAnimalPopup" type="Node3D"]
+script = ExtResource("1_h1w8i")
+
+[node name="DisplayMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_xitnd")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+debug_draw = 1
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="SubViewport/Control"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_c2lu5")
+
+[node name="NameLabel" type="Label" parent="SubViewport/Control/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 502.0
+offset_bottom = 55.0
+text = "Animal"
+label_settings = SubResource("LabelSettings_5cmkj")
+autowrap_mode = 2
+
+[node name="DietLabel" type="Label" parent="SubViewport/Control/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 502.0
+offset_bottom = 123.0
+text = "Diet: "
+autowrap_mode = 2
+
+[node name="ReproductionLabel" type="Label" parent="SubViewport/Control/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 150.0
+offset_right = 502.0
+offset_bottom = 173.0
+text = "Reproduction: "
+autowrap_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="SubViewport/Control/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 502.0
+offset_bottom = 223.0
+text = "Description:"
+autowrap_mode = 2

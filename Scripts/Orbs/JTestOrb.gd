@@ -1,11 +1,13 @@
 class_name Orb extends Node3D
 
+@onready var orb_animal_popup: Node3D = $OrbAnimalPopup
+
 @export var animalName = "default"
 @export var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
 var preyList= []
 var moved = false #Change this to true when the orb is moved or placed. Change to false after locking in
 var lastPos = Vector3(0.0,0.0,0.0) # set in ready
-var initialPopulation = 200
+var initialPopulation = 10000
 var population
 var lastScale = 1.0 #To prevent constant updating. Could be handled with controllers I think
 var grabbed # Used to stop orb from trying to shift back in place while being grabbed
@@ -40,6 +42,7 @@ func _on_released(orb):
 func highlight(orb, isHighlighted):
 	if orb == self:
 		$Highlight.visible = isHighlighted
+		orb_animal_popup.visible = isHighlighted
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -67,15 +70,17 @@ func _process(delta: float) -> void:
 	if(lastScale != scale.x):
 		#Scale should be the same for all values, so this is a work around
 		if(scale.x > 0.9 and scale.x < 1.2):
-			initialPopulation = 200
+			initialPopulation = 10000
 		elif(scale.x > 1.2 and scale.x < 1.5):
-			initialPopulation = 300
+			initialPopulation = 12500
 		elif(scale.x >= 1.5 and scale.x < 2.0):
-			initialPopulation = 500
+			initialPopulation = 15000
 		elif(scale.x > 2.0):
-			initialPopulation = 700
+			initialPopulation = 17500
 		elif(scale.x < 0.9 and scale.x > 0.5):
-			initialPopulation = 100
+			initialPopulation = 7500
 		elif(scale.x > 0.0 and scale.x <= 0.5):
-			initialPopulation = 50
+			initialPopulation = 5000
 	lastScale = scale.x
+	orb_animal_popup.position.x = scale.x 
+	orb_animal_popup.position.y = scale.x
