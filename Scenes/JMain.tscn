@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c0fia5kqtyu4c" path="res://SceneInstances/JBubbleCursor.tscn" id="5_2nd18"]
 [ext_resource type="PackedScene" uid="uid://dmkjj2o6d4yle" path="res://SceneInstances/JFlashlightSelection.tscn" id="6_s083v"]
 [ext_resource type="PackedScene" uid="uid://bn6laar0b1t3p" path="res://SceneInstances/GUI.tscn" id="7_0x617"]
-[ext_resource type="Script" path="res://Scripts/WebHandler2.gd" id="7_acbos"]
+[ext_resource type="Script" path="res://Scripts/Orbs/WebHandler2.gd" id="7_acbos"]
 [ext_resource type="PackedScene" uid="uid://d2ny4h0w312eh" path="res://Models/Animals/Deer/Deer.glb" id="9_7eqr1"]
 [ext_resource type="PackedScene" uid="uid://bembmau1gxhyb" path="res://Models/Animals/Fox/Fox.glb" id="10_i4ldd"]
 [ext_resource type="PackedScene" uid="uid://b3pr0ff3ly0b3" path="res://Models/Animals/Duck/Duck.glb" id="11_aehqm"]
@@ -77,40 +77,46 @@ transform = Transform3D(0.743063, 0, -0.669221, 0, 1, 0, 0.669221, 0, 0.743063, 
 [node name="Web" type="Node3D" parent="."]
 script = ExtResource("7_acbos")
 
-[node name="DeerOrb" parent="Web" instance=ExtResource("13_um5f1")]
+[node name="Shelf" type="Node3D" parent="."]
+
+[node name="DeerOrb" parent="Shelf" instance=ExtResource("13_um5f1")]
+skeleton = NodePath("../../Web")
 animalName = "deer"
 goalLoc = Vector3(1.5, 2.7, -3)
 
-[node name="Deer" parent="Web/DeerOrb" instance=ExtResource("9_7eqr1")]
+[node name="Deer" parent="Shelf/DeerOrb" instance=ExtResource("9_7eqr1")]
 transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
 
-[node name="FoxOrb" parent="Web" instance=ExtResource("13_um5f1")]
+[node name="FoxOrb" parent="Shelf" instance=ExtResource("13_um5f1")]
 skeleton = NodePath("../..")
 animalName = "fox"
 goalLoc = Vector3(0, 1.6, -6)
 
-[node name="Fox" parent="Web/FoxOrb" instance=ExtResource("10_i4ldd")]
+[node name="Fox" parent="Shelf/FoxOrb" instance=ExtResource("10_i4ldd")]
 transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, -0.2, 0)
 
-[node name="DuckOrb" parent="Web" instance=ExtResource("13_um5f1")]
+[node name="DuckOrb" parent="Shelf" instance=ExtResource("13_um5f1")]
+skeleton = NodePath("../../Web")
 animalName = "duck"
 goalLoc = Vector3(4, 1, -2.6)
 
-[node name="Duck" parent="Web/DuckOrb" instance=ExtResource("11_aehqm")]
+[node name="Duck" parent="Shelf/DuckOrb" instance=ExtResource("11_aehqm")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.2, 0)
 
-[node name="SquirrelOrb" parent="Web" instance=ExtResource("13_um5f1")]
+[node name="SquirrelOrb" parent="Shelf" instance=ExtResource("13_um5f1")]
+skeleton = NodePath("../../Web")
 animalName = "squirrel"
 goalLoc = Vector3(-4.6, 2.6, -4.3)
 
-[node name="Squirrel" parent="Web/SquirrelOrb" instance=ExtResource("12_6il63")]
+[node name="Squirrel" parent="Shelf/SquirrelOrb" instance=ExtResource("12_6il63")]
 transform = Transform3D(0.006, 0, 0, 0, 0.006, 0, 0, 0, 0.006, 0, 0, 0)
 
-[node name="CoyoteOrb" parent="Web" instance=ExtResource("13_um5f1")]
+[node name="CoyoteOrb" parent="Shelf" instance=ExtResource("13_um5f1")]
+skeleton = NodePath("../../Web")
 animalName = "coyote"
 goalLoc = Vector3(-2.5, 0.5, -1.4)
 
-[node name="Coyote" parent="Web/CoyoteOrb" instance=ExtResource("13_tmlhg")]
+[node name="Coyote" parent="Shelf/CoyoteOrb" instance=ExtResource("13_tmlhg")]
 transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, -0.287, 0)
 
 [connection signal="button_pressed" from="XROrigin3D/LeftController" to="XROrigin3D/LeftController" method="_on_button_pressed"]
