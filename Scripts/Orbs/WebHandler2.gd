@@ -111,7 +111,7 @@ func updateWeb():
 						webDict[animal].population += ceil(webDict[animal].population / 2)
 				"duck":
 					if(webDict[animal].population > 1):
-						webDict[animal].population += ceil(webDict[animal].population * 5)
+						webDict[animal].population += ceil(webDict[animal].population * 4)
 				"squirrel":
 					if(webDict[animal].population > 1):
 						webDict[animal].population += ceil(webDict[animal].population * (3/2))

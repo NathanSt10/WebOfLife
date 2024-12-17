@@ -1,5 +1,7 @@
 extends Node3D
 
+@onready var xr_origin_3d: XROrigin3D = $"../../XROrigin3D"
+
 @onready var display_mesh: MeshInstance3D = $GUIGrabBar/DisplayMesh
 @onready var instruction_label: Label = $GUIGrabBar/SubViewport/Control/Panel/InstructionLabel
 @onready var coyote_label: Label = $GUIGrabBar/SubViewport/Control/Panel/CoyoteLabel
@@ -14,6 +16,7 @@ extends Node3D
 @onready var button_3: MeshInstance3D = $GUIGrabBar/Button3
 
 var textHolder = ""
+var angleToUser = 0.0
 
 signal togglePlay
 signal resetSimulation
@@ -28,6 +31,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	look_at(xr_origin_3d.global_position,Vector3(0,1,0),true)
 	for animal in web_handler.webDict:
 		if(web_handler.webDict[animal] != null):
 			match animal:
