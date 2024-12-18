@@ -3,7 +3,8 @@ class_name Orb extends Node3D
 @onready var orb_animal_popup: Node3D = $OrbAnimalPopup
 
 @export var animalName = "default"
-@export var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler 
+@export var goalLoc = Vector3(0.0,0.5,-1.0) #Possibly set this in a handler
+@export var initialLoc = Vector3(0.0,1.0,2.0)
 var preyList= []
 var moved = false #Change this to true when the orb is moved or placed. Change to false after locking in
 var lastPos = Vector3(0.0,0.0,0.0) # set in ready
@@ -48,10 +49,10 @@ func highlight(orb, isHighlighted):
 func _process(delta: float) -> void:
 	#It's not exactly reaching the goalLoc. Just fix this in the handler.
 	#Once position stops updating, send a signal that says it's done moving
-	if(moved and grabbed):
+	if moved and grabbed:
 		#print("Moved is true, globalPos: %s" % global_position)
 		global_position = global_position.slerp(goalLoc, 2*delta)
-		if(global_position.distance_to(goalLoc) < 0.001): #Update this by adding an area3d that emits the signal when entered.
+		if global_position.distance_to(goalLoc) < 0.001: #Update this by adding an area3d that emits the signal when entered.
 			moved = false
 			global_position = goalLoc
 			lastPos = goalLoc
@@ -60,14 +61,15 @@ func _process(delta: float) -> void:
 			inPosition.emit(animalName, self)
 	elif not grabbed:
 		#print("Moved is false, lastPos: %s, globalPos: %s" % [lastPos, global_position])
+		print("Moved: %s" % moved)
 		moved = !(lastPos == global_position)
-		if(moved):
+		if moved:
 			print("Emit orbMoved")
 			orbMoved.emit(animalName, self)
 		lastPos = global_position
 		
 	#Scale handling
-	if(lastScale != scale.x):
+	if lastScale != scale.x:
 		#Scale should be the same for all values, so this is a work around
 		if(scale.x > 0.9 and scale.x < 1.2):
 			initialPopulation = 10000

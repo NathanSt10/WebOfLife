@@ -89,7 +89,7 @@ func disable_selection():
 
 
 func update_selection_position():
-	print("Updating selected position")
+	#print("Updating selected position")
 	selected.global_position = global_position
 
 

@@ -143,10 +143,8 @@ func onResetSimulation():
 func create_orb_threads():
 	for predator_name in relationships.keys():
 		var predator = webDict[predator_name]
-		print("predator from webDict: %s" % webDict[predator_name])
 		if predator == null or not is_predator(predator_name):
 			continue # Skip if predator is not in the web or not a predator
-		print("Predator (%s) in web" % predator.animalName)
 		for prey in relationships[predator_name]["prey"]:
 			if webDict[prey.animalName] == null:
 				continue # Skip if prey is not in the web
@@ -196,3 +194,19 @@ func update_threads():
 			if thread != null:
 				thread.points[0] = predator_raycast.get_collision_point()
 				thread.points[1] = prey_raycast.get_collision_point()
+
+
+#func _on_add_area_entered(area: Area3D) -> void:
+	#print("Add entered")
+#
+#
+#func _on_add_area_exited(area: Area3D) -> void:
+	#print("Add exited")
+#
+#
+#func _on_remove_area_entered(area: Area3D) -> void:
+	#print("Removed entered")
+#
+#
+#func _on_remove_area_exited(area: Area3D) -> void:
+	#print("Removed exited")

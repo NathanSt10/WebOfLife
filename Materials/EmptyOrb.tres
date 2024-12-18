@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://vwl7jpnq25lb"]
+
+[resource]
+transparency = 1
+cull_mode = 1
+albedo_color = Color(0, 0, 0, 0.501961)
+metallic = 0.05
+ao_light_affect = 0.41
+backlight = Color(0, 0.107524, 0.107724, 1)
+refraction_scale = 0.01
