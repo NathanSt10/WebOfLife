@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dlwgd0nqjokp7"
+path="res://.godot/imported/Plate.obj-48b43de01ded0b12274688919c616f77.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Plate.obj-48b43de01ded0b12274688919c616f77.mesh"]
+
+source_file="res://Models/Village_Pack/OBJ/Plate.obj"
+dest_files=["res://.godot/imported/Plate.obj-48b43de01ded0b12274688919c616f77.mesh", "res://.godot/imported/Plate.obj-48b43de01ded0b12274688919c616f77.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

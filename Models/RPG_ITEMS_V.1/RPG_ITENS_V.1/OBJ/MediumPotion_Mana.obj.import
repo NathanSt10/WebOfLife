@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cdhxwqr1kv1q6"
+path="res://.godot/imported/MediumPotion_Mana.obj-1e1fbd2abb545e3798162cfd922cf54d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/MediumPotion_Mana.obj-1e1fbd2abb545e3798162cfd922cf54d.mesh"]
+
+source_file="res://Models/RPG_ITEMS_V.1/RPG_ITENS_V.1/OBJ/MediumPotion_Mana.obj"
+dest_files=["res://.godot/imported/MediumPotion_Mana.obj-1e1fbd2abb545e3798162cfd922cf54d.mesh", "res://.godot/imported/MediumPotion_Mana.obj-1e1fbd2abb545e3798162cfd922cf54d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

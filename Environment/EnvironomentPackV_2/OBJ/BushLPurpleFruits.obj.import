@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://8iw4sty7qxgq"
+path="res://.godot/imported/BushLPurpleFruits.obj-b9748489c8989cc222569b03f7697e5e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BushLPurpleFruits.obj-b9748489c8989cc222569b03f7697e5e.mesh"]
+
+source_file="res://Environment/EnvironomentPackV_2/OBJ/BushLPurpleFruits.obj"
+dest_files=["res://.godot/imported/BushLPurpleFruits.obj-b9748489c8989cc222569b03f7697e5e.mesh", "res://.godot/imported/BushLPurpleFruits.obj-b9748489c8989cc222569b03f7697e5e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

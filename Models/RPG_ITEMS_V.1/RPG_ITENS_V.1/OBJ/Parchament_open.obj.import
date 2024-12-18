@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d1nn3arvqvmvt"
+path="res://.godot/imported/Parchament_open.obj-aed1f82a4f800f52e70cbbbd23561174.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Parchament_open.obj-aed1f82a4f800f52e70cbbbd23561174.mesh"]
+
+source_file="res://Models/RPG_ITEMS_V.1/RPG_ITENS_V.1/OBJ/Parchament_open.obj"
+dest_files=["res://.godot/imported/Parchament_open.obj-aed1f82a4f800f52e70cbbbd23561174.mesh", "res://.godot/imported/Parchament_open.obj-aed1f82a4f800f52e70cbbbd23561174.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

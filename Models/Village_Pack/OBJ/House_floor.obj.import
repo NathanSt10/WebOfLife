@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://fbpvr8pc8dsx"
+path="res://.godot/imported/House_floor.obj-3aa7948d9d8e900703772e24b2cdbe8e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/House_floor.obj-3aa7948d9d8e900703772e24b2cdbe8e.mesh"]
+
+source_file="res://Models/Village_Pack/OBJ/House_floor.obj"
+dest_files=["res://.godot/imported/House_floor.obj-3aa7948d9d8e900703772e24b2cdbe8e.mesh", "res://.godot/imported/House_floor.obj-3aa7948d9d8e900703772e24b2cdbe8e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://n6oocf7bcnec"
+path="res://.godot/imported/ChiliPlant_Stage01.obj-a35ff7a523cf3251f86446fa30f1954e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ChiliPlant_Stage01.obj-a35ff7a523cf3251f86446fa30f1954e.mesh"]
+
+source_file="res://Environment/EnvironomentPackV_2/OBJ/ChiliPlant_Stage01.obj"
+dest_files=["res://.godot/imported/ChiliPlant_Stage01.obj-a35ff7a523cf3251f86446fa30f1954e.mesh", "res://.godot/imported/ChiliPlant_Stage01.obj-a35ff7a523cf3251f86446fa30f1954e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

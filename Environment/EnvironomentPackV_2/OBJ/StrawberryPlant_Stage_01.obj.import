@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://disjspgq2no4u"
+path="res://.godot/imported/StrawberryPlant_Stage_01.obj-d5af55409abba4467472e57d9e09453a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/StrawberryPlant_Stage_01.obj-d5af55409abba4467472e57d9e09453a.mesh"]
+
+source_file="res://Environment/EnvironomentPackV_2/OBJ/StrawberryPlant_Stage_01.obj"
+dest_files=["res://.godot/imported/StrawberryPlant_Stage_01.obj-d5af55409abba4467472e57d9e09453a.mesh", "res://.godot/imported/StrawberryPlant_Stage_01.obj-d5af55409abba4467472e57d9e09453a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

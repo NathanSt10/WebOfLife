@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dgn4esxlammwx"
+path="res://.godot/imported/TerrainVertex.obj-3307746f37ff5fef57692f24cec7e179.mesh"
+
+[deps]
+
+files=["res://.godot/imported/TerrainVertex.obj-3307746f37ff5fef57692f24cec7e179.mesh"]
+
+source_file="res://Models/Village_Pack/OBJ/TerrainVertex.obj"
+dest_files=["res://.godot/imported/TerrainVertex.obj-3307746f37ff5fef57692f24cec7e179.mesh", "res://.godot/imported/TerrainVertex.obj-3307746f37ff5fef57692f24cec7e179.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

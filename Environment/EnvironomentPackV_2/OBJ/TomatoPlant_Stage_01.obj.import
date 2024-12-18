@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bocuemdpyospu"
+path="res://.godot/imported/TomatoPlant_Stage_01.obj-72d72292ad326bdb2a9c6681a1de5ad6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/TomatoPlant_Stage_01.obj-72d72292ad326bdb2a9c6681a1de5ad6.mesh"]
+
+source_file="res://Environment/EnvironomentPackV_2/OBJ/TomatoPlant_Stage_01.obj"
+dest_files=["res://.godot/imported/TomatoPlant_Stage_01.obj-72d72292ad326bdb2a9c6681a1de5ad6.mesh", "res://.godot/imported/TomatoPlant_Stage_01.obj-72d72292ad326bdb2a9c6681a1de5ad6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

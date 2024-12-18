@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://y2ppai4w48a2"
+path="res://.godot/imported/PumpkinPlant_Stage01.obj-7564aa89a073b8431ff2f422f1d6b260.mesh"
+
+[deps]
+
+files=["res://.godot/imported/PumpkinPlant_Stage01.obj-7564aa89a073b8431ff2f422f1d6b260.mesh"]
+
+source_file="res://Environment/EnvironomentPackV_2/OBJ/PumpkinPlant_Stage01.obj"
+dest_files=["res://.godot/imported/PumpkinPlant_Stage01.obj-7564aa89a073b8431ff2f422f1d6b260.mesh", "res://.godot/imported/PumpkinPlant_Stage01.obj-7564aa89a073b8431ff2f422f1d6b260.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

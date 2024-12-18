@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cf3atak0a6365"
+path="res://.godot/imported/SilverCoin.obj-adb772bb41161acb33231b90b7ff309e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SilverCoin.obj-adb772bb41161acb33231b90b7ff309e.mesh"]
+
+source_file="res://Models/RPG_ITEMS_V.1/RPG_ITENS_V.1/OBJ/SilverCoin.obj"
+dest_files=["res://.godot/imported/SilverCoin.obj-adb772bb41161acb33231b90b7ff309e.mesh", "res://.godot/imported/SilverCoin.obj-adb772bb41161acb33231b90b7ff309e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
