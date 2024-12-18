@@ -11,11 +11,11 @@ var line_renderer = preload("res://Scripts/Web_And_Orbs/LineRenderer.gd")
 var webDict = {"coyote" : null, "fox" : null, "deer" : null, "duck" : null, "squirrel" : null}
 
 @onready var relationships = {
-	"deer": {"predators": [fox, coyote], "prey": []},
-	"fox": {"predators": [coyote], "prey": [deer, squirrel, duck]},
+	"deer": {"predators": [coyote], "prey": []},
+	"fox": {"predators": [], "prey": [squirrel, duck]},
 	"squirrel": {"predators": [fox, coyote], "prey": []},
 	"duck": {"predators": [fox, coyote], "prey": []},
-	"coyote": {"predators": [], "prey": [deer, fox]}
+	"coyote": {"predators": [], "prey": [deer, squirrel, duck]}
 }
 
 #Simulation variables
@@ -29,8 +29,8 @@ func _ready() -> void:
 	deer.inPosition.connect(orbInPosition)
 	duck.inPosition.connect(orbInPosition)
 	squirrel.inPosition.connect(orbInPosition)
-	#gui.togglePlay.connect(onTogglePlay)
-	#gui.resetSimulation.connect(onResetSimulation)
+	gui.togglePlay.connect(onTogglePlay)
+	gui.resetSimulation.connect(onResetSimulation)
 
 func _process(delta: float) -> void:
 	create_orb_threads()
