@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://iwrg6g1uwy6c"
+path="res://.godot/imported/House_walltop.obj-95c9eaae73c7b9b66a52321a38fd833b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/House_walltop.obj-95c9eaae73c7b9b66a52321a38fd833b.mesh"]
+
+source_file="res://Models/Village_Pack/OBJ/House_walltop.obj"
+dest_files=["res://.godot/imported/House_walltop.obj-95c9eaae73c7b9b66a52321a38fd833b.mesh", "res://.godot/imported/House_walltop.obj-95c9eaae73c7b9b66a52321a38fd833b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

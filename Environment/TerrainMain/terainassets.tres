@@ -1,0 +1,37 @@
+[gd_resource type="Terrain3DAssets" load_steps=7 format=3 uid="uid://b6kau5ge7qr3m"]
+
+[ext_resource type="PackedScene" uid="uid://bus5esuj43p0g" path="res://Environment/Trunk_01.fbx" id="1_age0y"]
+[ext_resource type="Texture2D" uid="uid://dtfeqa6svlxsl" path="res://Environment/TerrainMain/Grass 1.png" id="1_njrly"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e57ed"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 960.0
+distance_fade_max_distance = 480.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_schof"]
+height_offset = 0.5
+density = 10.0
+material_override = SubResource("StandardMaterial3D_e57ed")
+generated_type = 1
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_l7jj6"]
+name = "Trunk_01"
+id = 1
+density = 10.0
+scene_file = ExtResource("1_age0y")
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_2sww8"]
+name = "Grass 1"
+albedo_color = Color(0.698202, 0.682442, 0.69013, 1)
+albedo_texture = ExtResource("1_njrly")
+normal_texture = ExtResource("1_njrly")
+uv_scale = 0.001
+
+[resource]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_schof"), SubResource("Terrain3DMeshAsset_l7jj6")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_2sww8")])

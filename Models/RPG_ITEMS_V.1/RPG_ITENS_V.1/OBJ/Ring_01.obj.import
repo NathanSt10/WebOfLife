@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b5unwv2y3j00l"
+path="res://.godot/imported/Ring_01.obj-a756d477ac14388b75d505623ace1f5f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Ring_01.obj-a756d477ac14388b75d505623ace1f5f.mesh"]
+
+source_file="res://Models/RPG_ITEMS_V.1/RPG_ITENS_V.1/OBJ/Ring_01.obj"
+dest_files=["res://.godot/imported/Ring_01.obj-a756d477ac14388b75d505623ace1f5f.mesh", "res://.godot/imported/Ring_01.obj-a756d477ac14388b75d505623ace1f5f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

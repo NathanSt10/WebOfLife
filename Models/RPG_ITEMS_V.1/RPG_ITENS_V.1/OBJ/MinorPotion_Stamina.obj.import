@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cfyojje3rxgbw"
+path="res://.godot/imported/MinorPotion_Stamina.obj-936863dceb5087004b62fd3b244156fd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/MinorPotion_Stamina.obj-936863dceb5087004b62fd3b244156fd.mesh"]
+
+source_file="res://Models/RPG_ITEMS_V.1/RPG_ITENS_V.1/OBJ/MinorPotion_Stamina.obj"
+dest_files=["res://.godot/imported/MinorPotion_Stamina.obj-936863dceb5087004b62fd3b244156fd.mesh", "res://.godot/imported/MinorPotion_Stamina.obj-936863dceb5087004b62fd3b244156fd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

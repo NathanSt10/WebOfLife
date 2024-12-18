@@ -4,9 +4,8 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3hx0r0jjg54l"
 path.s3tc="res://.godot/imported/Duck_MallardDuck_BaseColor.png-2ed5822e00dc30994664909d75fb98a3.s3tc.ctex"
-path.etc2="res://.godot/imported/Duck_MallardDuck_BaseColor.png-2ed5822e00dc30994664909d75fb98a3.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -16,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Models/Animals/Duck/Duck_MallardDuck_BaseColor.png"
-dest_files=["res://.godot/imported/Duck_MallardDuck_BaseColor.png-2ed5822e00dc30994664909d75fb98a3.s3tc.ctex", "res://.godot/imported/Duck_MallardDuck_BaseColor.png-2ed5822e00dc30994664909d75fb98a3.etc2.ctex"]
+dest_files=["res://.godot/imported/Duck_MallardDuck_BaseColor.png-2ed5822e00dc30994664909d75fb98a3.s3tc.ctex"]
 
 [params]
 

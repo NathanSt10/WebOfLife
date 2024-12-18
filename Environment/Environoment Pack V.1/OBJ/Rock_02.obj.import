@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://btkhjy5oj2cbf"
+path="res://.godot/imported/Rock_02.obj-894f176c97317c605800dcb2aef13117.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Rock_02.obj-894f176c97317c605800dcb2aef13117.mesh"]
+
+source_file="res://Environment/Environoment Pack V.1/OBJ/Rock_02.obj"
+dest_files=["res://.godot/imported/Rock_02.obj-894f176c97317c605800dcb2aef13117.mesh", "res://.godot/imported/Rock_02.obj-894f176c97317c605800dcb2aef13117.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

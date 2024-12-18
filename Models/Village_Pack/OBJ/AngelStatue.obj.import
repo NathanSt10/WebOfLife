@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ceps5jt7uassc"
+path="res://.godot/imported/AngelStatue.obj-456a90302c5acd1292599bb432d44bb6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/AngelStatue.obj-456a90302c5acd1292599bb432d44bb6.mesh"]
+
+source_file="res://Models/Village_Pack/OBJ/AngelStatue.obj"
+dest_files=["res://.godot/imported/AngelStatue.obj-456a90302c5acd1292599bb432d44bb6.mesh", "res://.godot/imported/AngelStatue.obj-456a90302c5acd1292599bb432d44bb6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

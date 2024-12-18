@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2jel6m6724db"]
+
+[ext_resource type="Script" path="res://Game/Scripts/Web_And_Orbs/WebHandler.gd" id="1_6yqsp"]
+
+[node name="Web" type="Node3D"]
+script = ExtResource("1_6yqsp")

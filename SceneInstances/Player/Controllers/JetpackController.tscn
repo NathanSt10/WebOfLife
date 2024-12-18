@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfgjo42yw61v2"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Controllers/JetpackController.gd" id="1_eubtv"]
+[ext_resource type="PackedScene" uid="uid://bkffgoyofd8a7" path="res://Models/Arm Cannon/arm_cannon.dae" id="2_b0qlq"]
+
+[node name="JetpackController" type="XRController3D"]
+script = ExtResource("1_eubtv")
+
+[node name="Jetpack Model" parent="." instance=ExtResource("2_b0qlq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.433013, -0.25, 0, 0.25, 0.433013, 0, 0.05, -0.1)
