@@ -41,5 +41,5 @@ mesh = SubResource("SphereMesh_h3joe")
 surface_material_override/0 = ExtResource("2_bu7xb")
 
 [node name="OrbAnimalPopup" parent="." instance=ExtResource("4_jh8ef")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55582, 1.12826, 0)
 visible = false
