@@ -1,8 +1,8 @@
 [gd_resource type="ArrayMesh" load_steps=7 format=4 uid="uid://dbgu25j4djnd5"]
 
-[ext_resource type="Texture2D" uid="uid://c1b6ypnqai3pd" path="res://TreeMain_NormalTree_Bark.png" id="1_rwttl"]
-[ext_resource type="Texture2D" uid="uid://cqkwf8317e52o" path="res://TreeMain_NormalTree_Bark_Normal.png" id="2_xkmyx"]
-[ext_resource type="Texture2D" uid="uid://cpkul2pmn08rf" path="res://TreeMain2_NormalTree_Leaves.png" id="3_eff2k"]
+[ext_resource type="Texture2D" uid="uid://c1b6ypnqai3pd" path="res://Environment/TreeMain_NormalTree_Bark.png" id="1_rwttl"]
+[ext_resource type="Texture2D" uid="uid://cqkwf8317e52o" path="res://Environment/TreeMain_NormalTree_Bark_Normal.png" id="2_xkmyx"]
+[ext_resource type="Texture2D" uid="uid://cpkul2pmn08rf" path="res://Environment/TreeMain2_NormalTree_Leaves.png" id="3_eff2k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhgbm"]
 resource_name = "NormalTree_Bark"
