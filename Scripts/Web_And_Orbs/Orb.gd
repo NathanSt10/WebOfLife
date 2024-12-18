@@ -22,9 +22,10 @@ func _ready() -> void:
 	population = initialPopulation
 	lastPos = global_position
 	for controller in controllers:
-		controller.get_child(0).grabbed.connect(_on_grabbed)
-		controller.get_child(0).released.connect(_on_released)
-		controller.get_child(0).highlight.connect(highlight)
+		if controller.get_child(0).name != "JetpackController":
+			controller.get_child(0).grabbed.connect(_on_grabbed)
+			controller.get_child(0).released.connect(_on_released)
+			controller.get_child(0).highlight.connect(highlight)
 
 
 func _on_grabbed(orb):
