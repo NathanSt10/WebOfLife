@@ -29,8 +29,8 @@ func _ready() -> void:
 	deer.inPosition.connect(orbInPosition)
 	duck.inPosition.connect(orbInPosition)
 	squirrel.inPosition.connect(orbInPosition)
-	gui.togglePlay.connect(onTogglePlay)
-	gui.resetSimulation.connect(onResetSimulation)
+	#gui.togglePlay.connect(onTogglePlay)
+	#gui.resetSimulation.connect(onResetSimulation)
 
 func _process(delta: float) -> void:
 	create_orb_threads()
@@ -125,6 +125,7 @@ func orbInPosition(animalName : String, orb : Node3D):
 		self.add_child(orb)
 	#create_orb_thread(orb)
 	webDict[animalName] = orb
+	print("%s (%s) added to webDict" % [webDict[animalName].name, orb.name])
 	#Add connection logic here. Toggle visibility of all connections from this node and to this node.
 	#May be difficult, but I think it's possible. Refer to how connections are updated using metadata
 
@@ -142,9 +143,10 @@ func onResetSimulation():
 func create_orb_threads():
 	for predator_name in relationships.keys():
 		var predator = webDict[predator_name]
+		print("predator from webDict: %s" % webDict[predator_name])
 		if predator == null or not is_predator(predator_name):
 			continue # Skip if predator is not in the web or not a predator
-		
+		print("Predator (%s) in web" % predator.animalName)
 		for prey in relationships[predator_name]["prey"]:
 			if webDict[prey.animalName] == null:
 				continue # Skip if prey is not in the web
