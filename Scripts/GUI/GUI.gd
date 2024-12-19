@@ -31,7 +31,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print("xr: ", xr_origin_3d)
 	look_at(xr_origin_3d.global_position,Vector3(0,1,0),true)
 	for animal in web_handler.webDict:
 		if(web_handler.webDict[animal] != null):
