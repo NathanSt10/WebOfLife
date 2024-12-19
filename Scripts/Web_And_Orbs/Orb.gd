@@ -12,6 +12,8 @@ var initialPopulation = 10000
 var population
 var lastScale = 1.0 #To prevent constant updating. Could be handled with controllers I think
 var grabbed # Used to stop orb from trying to shift back in place while being grabbed
+var toAdd = false
+var toRemove = false
 
 @onready var controllers = get_tree().get_nodes_in_group("controllers")
 
@@ -68,8 +70,8 @@ func highlight(orb, isHighlighted):
 func _process(delta: float) -> void:
 	#It's not exactly reaching the goalLoc. Just fix this in the handler.
 	#Once position stops updating, send a signal that says it's done moving
-	if moved and grabbed:
-		#print("Moved is true, globalPos: %s" % global_position)
+	if moved and grabbed and toAdd:
+		print("Moved is true, globalPos: %s" % global_position)
 		global_position = global_position.slerp(goalLoc, 2*delta)
 		if global_position.distance_to(goalLoc) < 0.001: #Update this by adding an area3d that emits the signal when entered.
 			moved = false
@@ -80,12 +82,15 @@ func _process(delta: float) -> void:
 			inPosition.emit(animalName, self)
 	elif not grabbed:
 		#print("Moved is false, lastPos: %s, globalPos: %s" % [lastPos, global_position])
-		print("Moved: %s" % moved)
-		moved = !(lastPos == global_position)
+		#print("Moved: %s" % moved)
+		moved = !((global_position != initialLoc) and (global_position != goalLoc))
 		if moved:
 			print("Emit orbMoved")
 			orbMoved.emit(animalName, self)
 		lastPos = global_position
+	
+	if toRemove:
+		global_position = initialLoc
 		
 	#Scale handling
 	if lastScale != scale.x:

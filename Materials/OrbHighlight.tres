@@ -2,6 +2,7 @@
 
 [resource]
 transparency = 1
+blend_mode = 1
 cull_mode = 1
 shading_mode = 0
-albedo_color = Color(1, 1, 1, 0.52549)
+albedo_color = Color(1, 1, 1, 0.0862745)

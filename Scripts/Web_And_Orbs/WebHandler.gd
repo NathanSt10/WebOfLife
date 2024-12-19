@@ -196,17 +196,20 @@ func update_threads():
 				thread.points[1] = prey_raycast.get_collision_point()
 
 
-#func _on_add_area_entered(area: Area3D) -> void:
-	#print("Add entered")
-#
-#
-#func _on_add_area_exited(area: Area3D) -> void:
-	#print("Add exited")
-#
-#
-#func _on_remove_area_entered(area: Area3D) -> void:
-	#print("Removed entered")
-#
-#
-#func _on_remove_area_exited(area: Area3D) -> void:
-	#print("Removed exited")
+func _on_add_area_entered(area: Area3D) -> void:
+	print("%s entered add " % area.get_parent())
+	area.get_parent().toAdd = true
+
+
+func _on_add_area_exited(area: Area3D) -> void:
+	print("%s left add " % area.get_parent())
+	#area.get_parent().toAdd = false
+
+func _on_remove_area_entered(area: Area3D) -> void:
+	print("%s entered remove " % area.get_parent())
+	area.get_parent().toRemove = true
+	
+
+func _on_remove_area_exited(area: Area3D) -> void:
+	print("%s left remove " % area.get_parent().name)
+	#area.get_parent().toRemove = false
