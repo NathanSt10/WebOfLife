@@ -234,6 +234,7 @@ func _on_remove_area_entered(area: Area3D) -> void:
 		prey.remove_child(thread)
 	
 	orb.global_position = orb.initialLoc
+	#orb.scale = Vector3.ONE
 
 
 func _on_remove_area_exited(area: Area3D) -> void:
