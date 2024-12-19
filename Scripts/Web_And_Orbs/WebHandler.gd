@@ -143,10 +143,8 @@ func onResetSimulation():
 func create_orb_threads():
 	for predator_name in relationships.keys():
 		var predator = webDict[predator_name]
-		print("predator from webDict: %s" % webDict[predator_name])
 		if predator == null or not is_predator(predator_name):
 			continue # Skip if predator is not in the web or not a predator
-		print("Predator (%s) in web" % predator.animalName)
 		for prey in relationships[predator_name]["prey"]:
 			if webDict[prey.animalName] == null:
 				continue # Skip if prey is not in the web

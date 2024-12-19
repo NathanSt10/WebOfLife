@@ -48,21 +48,22 @@ func _process(delta: float) -> void:
 		highlighted_collider = null
 		
 	if selected:
+		highlight.emit(highlighted_collider, false)
 		update_selection_position()
 
 # Enable shapecast and make controllers visible
 func enable_selection():
 	print("enable selection")
 	var controllers = get_tree().get_nodes_in_group("controllers")
-	if controllers[0].get_child(0).name == "Flashlight":
+	if controllers[0].get_child_count() > 1 and controllers[0].get_child(1).name == "Flashlight":
 		print("%s controller is flashlight" % controllers[0])
-		controllers[0].get_child(0).find_child("ShapeCast3D").enabled = true
-		controllers[0].get_child(0).visible = true
+		controllers[0].get_child(1).find_child("ShapeCast3D").enabled = true
+		controllers[0].get_child(1).visible = true
 		area_3d.monitorable = true
-	if controllers[1].get_child(0).name == "Flashlight":
+	if controllers[1].get_child_count() > 1 and controllers[1].get_child(1).name == "Flashlight":
 		print("%s controller is flashlight" % controllers[1])
-		controllers[1].get_child(0).find_child("ShapeCast3D").enabled = true
-		controllers[1].get_child(0).visible = true
+		controllers[1].get_child(1).find_child("ShapeCast3D").enabled = true
+		controllers[1].get_child(1).visible = true
 		area_3d.monitorable = true
 	
 	selected.scale = Vector3(1, 1, 1)
@@ -73,15 +74,15 @@ func enable_selection():
 func disable_selection():
 	print("disable selection")
 	highlight.emit(selected, false)
-	if controllers[0].get_child(0).name == "Flashlight":
+	if controllers[0].get_child_count() > 1 and controllers[0].get_child(1).name == "Flashlight":
 		print("%s controller is flashlight" % controllers[0])
-		controllers[0].get_child(0).find_child("ShapeCast3D").enabled = false
-		controllers[0].get_child(0).visible = false
+		controllers[0].get_child(1).find_child("ShapeCast3D").enabled = false
+		controllers[0].get_child(1).visible = false
 		area_3d.monitorable = false 
-	if controllers[1].get_child(0).name == "Flashlight":
+	if controllers[1].get_child_count() > 1 and controllers[1].get_child(1).name == "Flashlight":
 		print("%s controller is flashlight" % controllers[1])
-		controllers[1].get_child(0).find_child("ShapeCast3D").enabled = false
-		controllers[1].get_child(0).visible = false
+		controllers[1].get_child(1).find_child("ShapeCast3D").enabled = false
+		controllers[1].get_child(1).visible = false
 		area_3d.monitorable = false
 	
 	print("setting scale to .5")
