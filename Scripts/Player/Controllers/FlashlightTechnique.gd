@@ -48,6 +48,7 @@ func _process(delta: float) -> void:
 		highlighted_collider = null
 		
 	if selected:
+		highlight.emit(highlighted_collider, false)
 		update_selection_position()
 
 # Enable shapecast and make controllers visible
