@@ -126,11 +126,9 @@ offset_bottom = 320.0
 text = "
 Web of Life
 Controls:
-A/X button: Changes selection mode
-B/Y button: Switches to jetpack mode
-Grip button: Used to select/manipulate an object
-Trigger button: Used to activate the jetpack
-**You are able to switch the controller on either hand independently**
+A/X button: Switches selection mode
+Grip button: Used to grab an object
+Trigger button: Used to activate the jetpack (point where you want to go)
 
 GUI Buttons: Select by hovering over them with the flashlight or bubble cursor for 2 seconds
 Green Button: Start and Stop simulation
