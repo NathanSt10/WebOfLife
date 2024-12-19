@@ -9,6 +9,7 @@ var selected: MeshInstance3D
 
 @onready var area_3d: Area3D = $Area3D
 
+signal object_grabbed(grabbed_object)
 signal grabbed(orb)
 signal released(orb)
 signal highlight(orb, isHighlighted)
@@ -40,10 +41,16 @@ var prev
 func _process(delta: float) -> void:
 	if $"ShapeCast3D".is_colliding(): # Known bug to crash when swithcing between flashlight and bubble
 		highlighted_collider = $"ShapeCast3D".get_collider(0).get_parent()
+		if not highlighted_collider.has_meta("original_scale"):
+			highlighted_collider.set_meta("original_scale", highlighted_collider.scale)
 		if prev != highlighted_collider: highlight.emit(prev, false)
 		highlight.emit(highlighted_collider, true)
 		prev = highlighted_collider
 	elif highlighted_collider != null and selected == null:
+		if highlighted_collider.has_meta("original_scale"):
+			highlighted_collider.scale = highlighted_collider.get_meta("original_scale")
+		else:
+			highlighted_collider.scale = highlighted_collider.get_meta("original_scale")
 		highlight.emit(highlighted_collider, false)
 		highlighted_collider = null
 		
@@ -66,7 +73,8 @@ func enable_selection():
 		controllers[1].get_child(1).visible = true
 		area_3d.monitorable = true
 	
-	selected.scale = Vector3(1, 1, 1)
+	if selected and selected.has_meta("current_scale"):
+		selected.scale = selected.get_meta("current_scale")
 	if "lastPos" in selected:
 		selected.global_position = selected.lastPos
 
@@ -74,19 +82,9 @@ func enable_selection():
 func disable_selection():
 	print("disable selection")
 	highlight.emit(selected, false)
-	if controllers[0].get_child_count() > 1 and controllers[0].get_child(1).name == "Flashlight":
-		print("%s controller is flashlight" % controllers[0])
-		controllers[0].get_child(1).find_child("ShapeCast3D").enabled = false
-		controllers[0].get_child(1).visible = false
-		area_3d.monitorable = false 
-	if controllers[1].get_child_count() > 1 and controllers[1].get_child(1).name == "Flashlight":
-		print("%s controller is flashlight" % controllers[1])
-		controllers[1].get_child(1).find_child("ShapeCast3D").enabled = false
-		controllers[1].get_child(1).visible = false
-		area_3d.monitorable = false
 	
-	print("setting scale to .5")
-	selected.scale = Vector3(0.5, 0.5, 0.5)
+	if selected:
+		selected.set_meta("current_scale", selected.scale)
 
 
 func update_selection_position():
@@ -99,6 +97,7 @@ func _on_button_pressed(name: String) -> void:
 		print("grip clicked")
 		grabbed.emit(highlighted_collider)
 		selected = highlighted_collider
+		object_grabbed.emit(selected)
 		if "lastPos" in selected:
 			selected.lastPos = highlighted_collider.global_position
 		disable_selection()
@@ -117,22 +116,21 @@ func _on_button_released(name: String) -> void:
 			selected.grabbed = true
 		
 		selected = null
+		object_grabbed.emit(selected)
 
 
 func _on_left_controller_switched(controller_type: String, is_left: bool):
 	print("Left Flashlight switched to Bubble")
 	if selected:
-		selected.scale = Vector3(1, 1, 1)
+		if selected.has_meta("current_scale"):
+			selected.scale = selected.get_meta("current_scale")
 		enable_selection()
 		selected = null
-	if highlighted_collider:
-		highlighted_collider.scale = Vector3(1, 1, 1)
 
 func _on_right_controller_switched(controller_type: String, is_left: bool):
 	print("Right Flashlight switched to Bubble")
 	if selected:
-		selected.scale = Vector3(1, 1, 1)
+		if selected.has_meta("current_scale"):
+			selected.scale = selected.get_meta("current_scale")
 		enable_selection()
 		selected = null
-	if highlighted_collider:
-		highlighted_collider.scale = Vector3(1, 1, 1)
