@@ -23,9 +23,28 @@ func _ready() -> void:
 	population = initialPopulation
 	lastPos = global_position
 	for controller in controllers:
-		controller.get_child(0).grabbed.connect(_on_grabbed)
-		controller.get_child(0).released.connect(_on_released)
-		controller.get_child(0).highlight.connect(highlight)
+		controller.controller_switched.connect(_controller_switched)
+		if controller.get_child_count() > 1 and controller.get_child(1).name == "Flashlight":
+				controller.get_child(1).grabbed.connect(_on_grabbed)
+				controller.get_child(1).released.connect(_on_released)
+				controller.get_child(1).highlight.connect(highlight)
+
+
+func _controller_switched(controller_type, is_left):
+	if is_left: # is left check isnt necessary, you can run it in a for loop like in ready and the results are the same
+		if controllers[1].get_child_count() > 1 and controllers[1].get_child(1).name == "Flashlight":
+			print("controller equals flashlight")
+			print("controller: %s" % controllers[1].get_child(1).name)
+			controllers[1].get_child(1).grabbed.connect(_on_grabbed)
+			controllers[1].get_child(1).released.connect(_on_released)
+			controllers[1].get_child(1).highlight.connect(highlight)
+	else:
+		if controllers[0].get_child_count() > 1 and controllers[0].get_child(1).name == "Flashlight":
+			print("controller equals flashlight")
+			print("controller: %s" % controllers[1].get_child(1).name)
+			controllers[0].get_child(1).grabbed.connect(_on_grabbed)
+			controllers[0].get_child(1).released.connect(_on_released)
+			controllers[0].get_child(1).highlight.connect(highlight)
 
 
 func _on_grabbed(orb):

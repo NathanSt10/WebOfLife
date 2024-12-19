@@ -1,14 +1,21 @@
 extends XROrigin3D
 
-@export var left_controller : XRController3D
-@export var right_controller : XRController3D
-
-@export var max_radius = 0.8
-@export var min_radius = 0.0
+@export var left_controller: XRController3D
+@export var right_controller: XRController3D
 
 enum ControllerMode { JETPACK, CURSOR, FLASHLIGHT }
-@export var left_mode : ControllerMode = ControllerMode.FLASHLIGHT
-@export var right_mode : ControllerMode = ControllerMode.FLASHLIGHT
+
+@export var left_mode: ControllerMode = ControllerMode.FLASHLIGHT
+@export var right_mode: ControllerMode = ControllerMode.FLASHLIGHT
+
+@onready var cylinder = get_node("../Environment/Boundary")
+@onready var cylinder_radius = cylinder.radius
+@onready var cylinder_height = cylinder.height
+@onready var cylinder_center = cylinder.global_transform.origin  # Use global position of the cylinder
+@export var pull_strength: float = 10.0
+
+var start_pos
+var current_pos
 
 var velocity_left = Vector3.ZERO
 var velocity_right = Vector3.ZERO
@@ -18,80 +25,44 @@ var velocity_right = Vector3.ZERO
 @export var deceleration = 5.0
 @export var jetpack_button = "trigger"
 
-var is_colliding = false
-var collision_normal = Vector3.ZERO
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	left_controller = $"LeftController"
 	right_controller = $"RightController"
-	left_controller.connect("controller_switched", _on_controller_switched)
-	right_controller.connect("controller_switched", _on_controller_switched)
-
-
-func _on_controller_switched(controller_type: String, is_left: bool):
-	if controller_type == "jetpack":
-		if is_left:
-			left_mode = ControllerMode.JETPACK
-		else:
-			right_mode = ControllerMode.JETPACK
-	elif controller_type == "bubble":
-		if is_left:
-			left_mode = ControllerMode.CURSOR
-		else:
-			right_mode = ControllerMode.CURSOR
-	elif controller_type == "flashlight":
-		if is_left:
-			left_mode = ControllerMode.FLASHLIGHT
-		else:
-			right_mode = ControllerMode.FLASHLIGHT
-
-
-var collision_objects = []
+	start_pos = global_position
 
 func _process(delta: float) -> void:
-	# Code provided by ChatGPT to provide "bouncy" feel
-	if is_colliding:
-		# Prevent moving further into the collision object
-		var correction = Vector3.ZERO
-		for area in collision_objects:
-			if area and area.global_transform:  # Ensure area is valid
-				var direction_to_object = (area.global_transform.origin - self.global_transform.origin).normalized()
-				if velocity_left.dot(direction_to_object) > 0:
-					correction -= direction_to_object * velocity_left.dot(direction_to_object)
-				if velocity_right.dot(direction_to_object) > 0:
-					correction -= direction_to_object * velocity_right.dot(direction_to_object)
-		velocity_left += correction
-		velocity_right += correction
+	# Jetpack movement for left controller
+	if left_controller and left_controller.is_button_pressed(jetpack_button):
+		var forward_direction = -left_controller.global_transform.basis.z.normalized()
+		velocity_left += forward_direction * jetpack_speed * acceleration * delta
+	else:
+		velocity_left = velocity_left.lerp(Vector3.ZERO, deceleration * delta)
 
+	# Jetpack movement for right controller
+	if right_controller and right_controller.is_button_pressed(jetpack_button):
+		var forward_direction = -right_controller.global_transform.basis.z.normalized()
+		velocity_right += forward_direction * jetpack_speed * acceleration * delta
+	else:
+		velocity_right = velocity_right.lerp(Vector3.ZERO, deceleration * delta)
 
-	# Jetpack movement logic
-	if left_mode == ControllerMode.JETPACK:
-		if left_controller and left_controller.is_button_pressed(jetpack_button):
-			var forward_direction = -left_controller.transform.basis.z.normalized()
-			velocity_left += forward_direction * jetpack_speed * delta * acceleration
-		else:
-			velocity_left = velocity_left.lerp(Vector3.ZERO, deceleration * delta)
-		self.global_transform.origin += velocity_left * delta
+	var total_velocity = velocity_left + velocity_right
 
-	if right_mode == ControllerMode.JETPACK:
-		if right_controller and right_controller.is_button_pressed(jetpack_button):
-			var forward_direction = -right_controller.transform.basis.z.normalized()
-			velocity_right += forward_direction * jetpack_speed * delta * acceleration
-		else:
-			velocity_right = velocity_right.lerp(Vector3.ZERO, deceleration * delta)
-		self.global_transform.origin += velocity_right * delta
+	# Update the current position
+	current_pos = global_transform.origin + total_velocity * delta
 
-	var total_velocity = (velocity_left + velocity_right).length()
-	var normalized_speed = clamp(total_velocity / (jetpack_speed * 2), 0.0, 1.0)
-	var vignette_size = lerp(min_radius, max_radius, normalized_speed)
+	# Check horizontal bounds relative to the cylinder center
+	var horizontal_offset = current_pos - cylinder_center
+	horizontal_offset.y = 0  # Ignore the vertical offset
+	var horizontal_distance = horizontal_offset.length()
+	if horizontal_distance > cylinder_radius:
+		horizontal_offset = horizontal_offset.normalized() * cylinder_radius
+		current_pos.x = cylinder_center.x + horizontal_offset.x
+		current_pos.z = cylinder_center.z + horizontal_offset.z
 
-func _on_area_3d_area_entered(area: Area3D) -> void:
-	if area not in collision_objects:
-		collision_objects.append(area)
-	is_colliding = true
+	# Clamp the position within the height of the cylinder
+	if abs(current_pos.y - cylinder_center.y) > cylinder_height / 2:
+		current_pos.y = clamp(current_pos.y, cylinder_center.y - cylinder_height / 2, cylinder_center.y + cylinder_height / 2)
 
-func _on_area_3d_area_exited(area: Area3D) -> void:
-	if area in collision_objects:
-		collision_objects.erase(area)
-	is_colliding = len(collision_objects) > 0
+	# Apply the final position
+	global_transform.origin = current_pos
