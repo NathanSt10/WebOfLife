@@ -75,7 +75,9 @@ func _process(delta: float) -> void:
 		global_position = global_position.slerp(goalLoc, 2*delta)
 		if global_position.distance_to(goalLoc) < 0.001: #Update this by adding an area3d that emits the signal when entered.
 			moved = false
-			global_position = goalLoc
+			if not toRemove:
+				global_position = goalLoc
+			toAdd = false
 			lastPos = goalLoc
 			print("Emit inPosition")
 			print("Animal Name: %s, Self: %s" % [animalName, self])
@@ -89,9 +91,7 @@ func _process(delta: float) -> void:
 			orbMoved.emit(animalName, self)
 		lastPos = global_position
 	
-	if toRemove:
-		global_position = initialLoc
-		
+	
 	#Scale handling
 	if lastScale != scale.x:
 		#Scale should be the same for all values, so this is a work around

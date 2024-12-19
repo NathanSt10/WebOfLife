@@ -206,9 +206,35 @@ func _on_add_area_exited(area: Area3D) -> void:
 	#area.get_parent().toAdd = false
 
 func _on_remove_area_entered(area: Area3D) -> void:
-	print("%s entered remove " % area.get_parent())
-	area.get_parent().toRemove = true
+	print("%s ENTERED REMOVE " % area.get_parent().animalName)
+	var orb = area.get_parent()
+	orb.toRemove = true
+	webDict[orb.animalName] = null
+	#for raycast in orb.get_children():
+		#if raycast is not RayCast3D or not MeshInstance3D:
+			#continue
+		#orb.remove_child(raycast)
 	
+	for predator in relationships[orb.animalName]["predators"]:
+		print("%s's predator is %s" % [orb.animalName, predator.animalName])
+		var raycast = orb.get_node_or_null("./%s_raycast" % predator.animalName)
+		var thread = orb.get_node_or_null("./%s_thread" % predator.animalName)
+		if raycast == null: # thread should never be null if raycast exists
+			continue
+		print("deleting %s and %s" % [raycast, thread])
+		orb.remove_child(raycast)
+		orb.remove_child(thread)
+	
+	for prey in relationships[orb.animalName]["prey"]:
+		var raycast = prey.get_node_or_null("./%s_raycast" % orb.animalName)
+		var thread = prey.get_node_or_null("./%s_thread" % orb.animalName)
+		if raycast == null:
+			continue
+		prey.remove_child(raycast)
+		prey.remove_child(thread)
+	
+	orb.global_position = orb.initialLoc
+
 
 func _on_remove_area_exited(area: Area3D) -> void:
 	print("%s left remove " % area.get_parent().name)
