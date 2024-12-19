@@ -65,4 +65,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	var max = max(get_parent().scale, 3)
+	position = Vector3(0, max, 0)

@@ -101,5 +101,4 @@ func _process(delta: float) -> void:
 		elif(scale.x > 0.0 and scale.x <= 0.5):
 			initialPopulation = 5000
 	lastScale = scale.x
-	orb_animal_popup.position.x = scale.x 
-	orb_animal_popup.position.y = scale.x
+	

@@ -82,6 +82,16 @@ func enable_selection():
 func disable_selection():
 	print("disable selection")
 	highlight.emit(selected, false)
+	if controllers[0].get_child_count() > 1 and controllers[0].get_child(1).name == "Flashlight":
+		print("%s controller is flashlight" % controllers[0])
+		controllers[0].get_child(1).find_child("ShapeCast3D").enabled = false
+		controllers[0].get_child(1).visible = false
+		area_3d.monitorable = false 
+	if controllers[1].get_child_count() > 1 and controllers[1].get_child(1).name == "Flashlight":
+		print("%s controller is flashlight" % controllers[1])
+		controllers[1].get_child(1).find_child("ShapeCast3D").enabled = false
+		controllers[1].get_child(1).visible = false
+		area_3d.monitorable = false
 	
 	if selected:
 		selected.set_meta("current_scale", selected.scale)
